@@ -6,6 +6,7 @@ defineProps({
 
 <template>
   <div v-editable="blok" class="grid">
+    column ratio: {{ blok.ratio }}
     <StoryblokComponent
       v-for="blok in blok.columns"
       :key="blok._uid"
