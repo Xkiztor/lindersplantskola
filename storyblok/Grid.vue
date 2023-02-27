@@ -5,8 +5,11 @@ defineProps({
 </script>
 
 <template>
-  <div v-editable="blok" class="grid">
-    column ratio: {{ blok.ratio }}
+  <div
+    v-editable="blok"
+    class="grid"
+    :style="{ gridTemplateColumns: blok.ratio }"
+  >
     <StoryblokComponent
       v-for="blok in blok.columns"
       :key="blok._uid"
@@ -18,7 +21,7 @@ defineProps({
 <style>
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr 1fr; */
   place-items: center;
   gap: 1rem;
 }
