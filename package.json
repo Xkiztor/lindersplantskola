@@ -8,10 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@vueuse/core": "^9.13.0",
-    "@vueuse/nuxt": "^9.13.0",
-    "nuxt": "^3.2.2",
-    "nuxt-icon": "^0.3.2"
+    "nuxt": "^3.2.2"
   },
   "dependencies": {
     "@storyblok/nuxt": "^5.1.0"
