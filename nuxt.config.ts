@@ -3,6 +3,6 @@ export default defineNuxtConfig({
   modules: [
     // 'nuxt-icon',
     // '@vueuse/nuxt',
-    ["@storyblok/nuxt", { accessToken: "vQAge7njq09k7mMMgmWRLgtt" }]
+    ["@storyblok/nuxt", { accessToken: "a32oT9XFKc0g2yhyjpiQ6Qtt" }]
   ]
 })

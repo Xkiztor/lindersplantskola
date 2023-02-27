@@ -1,10 +1,11 @@
 <script setup lang="ts">
 
-// const story = await useStoryblok('home')
+const story = await useAsyncStoryblok('home', { version: "draft" })
 </script>
 
 <template>
-  <div>
+  <StoryblokComponent v-if="story" :blok="story.content" />
+<!-- <div>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, corporis minus! Accusamus rem aut maiores non,
       quaerat ex nihil? Fuga iure qui facilis aspernatur hic harum rerum eaque sint molestias!
@@ -21,11 +22,11 @@
       quaerat molestiae quas, aliquam perferendis. Explicabo beatae laudantium ab quia consequatur dignissimos
       perspiciatis libero provident itaque reprehenderit voluptates iure adipisci quidem nesciunt a quasi, nobis error
       eaque! Molestias vero commodi odio explicabo repudiandae natus laborum illum animi amet incidunt earum, dolor
-      excepturi et, facilis minus quas aspernatur? Aliquid explicabo ut obcaecati. Similique nihil pariatur nobis quo
-      earum voluptates optio inventore omnis nemo! Praesentium officiis tempore beatae, pariatur cupiditate iusto unde
-      qui, ullam in corporis nihil illum, possimus ipsa saepe consequuntur. Laudantium.
-    </p>
-  </div>
+        excepturi et, facilis minus quas aspernatur? Aliquid explicabo ut obcaecati. Similique nihil pariatur nobis quo
+        earum voluptates optio inventore omnis nemo! Praesentium officiis tempore beatae, pariatur cupiditate iusto unde
+        qui, ullam in corporis nihil illum, possimus ipsa saepe consequuntur. Laudantium.
+      </p>
+    </div> -->
 </template>
 
 <style
