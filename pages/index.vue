@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const story = await useStoryblok('home')
+// const story = await useStoryblok('home')
 </script>
 
 <template>
