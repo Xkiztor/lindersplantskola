@@ -1,15 +1,11 @@
 <script setup>
-  defineProps({ blok: Object})
+defineProps({ blok: Object });
 </script>
-
 
 <template>
   <div v-editable="blok">
-    Name: {{ blok.name }}
+    {{ blok.name }}
   </div>
 </template>
 
-
-<style>
-
-</style>
+<style></style>

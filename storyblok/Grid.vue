@@ -1,15 +1,28 @@
 <script setup>
 defineProps({
-  blok: Object
-})
+  blok: Object,
+});
 </script>
 
-
 <template>
-  <div v-editable="blok">
-    <StoryblokComponent v-for="blok in blok.columns" :key="blok._uid" :blok="blok" />
+  <div v-editable="blok" class="grid">
+    <StoryblokComponent
+      v-for="blok in blok.columns"
+      :key="blok._uid"
+      :blok="blok"
+    />
   </div>
 </template>
 
+<style>
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+  gap: 1rem;
+}
 
-<style></style>
+.grid * {
+  border: 1px solid red;
+}
+</style>
