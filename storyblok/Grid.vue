@@ -23,10 +23,5 @@ defineProps({
   display: grid;
   /* grid-template-columns: 1fr 1fr 1fr; */
   place-items: center;
-  gap: 1rem;
-}
-
-.grid * {
-  border: 1px solid red;
 }
 </style>
