@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { slug } = useRoute().params;
+</script>
 
 <template>
-  <div>hello</div>
+  <div>{{ slug }}</div>
 </template>
 
 <style></style>

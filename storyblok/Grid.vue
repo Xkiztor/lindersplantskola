@@ -1,17 +1,18 @@
 <script setup>
-defineProps({
+const props = defineProps({
   blok: Object,
 });
+console.log(props.blok);
 </script>
 
 <template>
   <div
-    v-editable="blok"
+    v-editable="props.blok"
     class="grid"
-    :style="{ gridTemplateColumns: blok.ratio }"
+    :style="{ gridTemplateColumns: blok.ratio, gap: blok.gap + 'rem' }"
   >
     <StoryblokComponent
-      v-for="blok in blok.columns"
+      v-for="blok in props.blok.columns"
       :key="blok._uid"
       :blok="blok"
     />

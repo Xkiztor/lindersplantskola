@@ -3,9 +3,7 @@ defineProps({ blok: Object });
 </script>
 
 <template>
-  <div v-editable="blok">
-    <img :src="blok.image.filename" :alt="blok.title" />
-  </div>
+  <div v-editable="blok"></div>
 </template>
 
 <style></style>
