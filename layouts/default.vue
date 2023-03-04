@@ -15,6 +15,9 @@ onClickOutside(outsideTarget, () => {
   isDropdownOpen.value = false;
 });
 
+const rawDate = new Date();
+const year = rawDate.getFullYear();
+
 useHead({
   title: 'Lindersplantskola',
   meta: [
@@ -100,7 +103,7 @@ useHead({
           </div>
         </div>
         <div class="bottom-legal">
-          <p>© 2023 Linders Plantskola</p>
+          <p>© {{ year }} Linders Plantskola</p>
         </div>
       </footer>
     </div>

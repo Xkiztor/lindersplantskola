@@ -6,4 +6,9 @@ export default defineNuxtConfig({
     '@nuxt/image-edge',
     ['@storyblok/nuxt', { accessToken: 'a32oT9XFKc0g2yhyjpiQ6Qtt' }],
   ],
+  image: {
+    storyblok: {
+      baseURL: 'https://a.storyblok.com',
+    },
+  },
 });
