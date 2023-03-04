@@ -1,9 +1,29 @@
 <script setup>
+// import cloneDeep from 'clone-deep';
 const props = defineProps({ blok: Object });
 
 console.log(props.blok);
 
 const resolvedRichText = computed(() => renderRichText(props.blok.richText));
+
+// const mySchema = cloneDeep(RichTextSchema); // you can make a copy of the default RichTextSchema
+// ... and edit the nodes and marks, or add your own.
+// Check the base RichTextSchema source here https://github.com/storyblok/storyblok-js-client/blob/v4/source/schema.js
+console.log(RichTextSchema.nodes.image('alt', 'hello'));
+
+// const articleContent = computed(() =>
+//   renderRichText(props.blok.richText, {
+//     schema: mySchema,
+//     resolver: (component, blok) => {
+//       switch (component) {
+//         case 'my-custom-component':
+//           return `<div class="my-component-class">${blok.text}</div>`;
+//         default:
+//           return 'Resolver not defined';
+//       }
+//     },
+//   })
+// );
 </script>
 
 <template>

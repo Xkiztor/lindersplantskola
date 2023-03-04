@@ -3,7 +3,20 @@ import { apiPlugin } from '@storyblok/js';
 export function useBlogs() {
   const storyblokApi = useStoryblokApi();
 
-  async function fetchAllBlogs() {}
+  async function fetchAllBlogs() {
+    try {
+      const { data } = await storyblokApi.get('cdn/stories', {
+        version: 'draft',
+        starts_with: 'bloggar',
+        is_startpage: 0,
+      });
+
+      const stories = data.stories;
+      return stories;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function fetchBlogBySlug(slug: string) {
     try {

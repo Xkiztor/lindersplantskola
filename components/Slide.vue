@@ -3,11 +3,14 @@ const props = defineProps(['image', 'index', 'currentNum']);
 </script>
 
 <template>
-  <img
+  <nuxt-img
     v-if="currentNum === props.index"
-    :src="props.image.filename"
+    :src="props.image.filename + '/m/'"
     alt=""
     class="carousel-image"
+    quality="20"
+    width="200"
+    height="100"
   />
 </template>
 

@@ -67,7 +67,7 @@ useHead({
               <nuxt-link to="/">HEM</nuxt-link>
               <nuxt-link to="/sortiment">SORTIMENT</nuxt-link>
               <nuxt-link to="/om-oss">OM OSS</nuxt-link>
-              <nuxt-link to="/blogg">BLOGG</nuxt-link>
+              <nuxt-link to="/bloggar">BLOGG</nuxt-link>
               <nuxt-link to="https://superlistan.lindersplantskola.se/">
                 SUPERLISTAN
               </nuxt-link>
@@ -77,7 +77,7 @@ useHead({
             <nuxt-link to="/">HEM</nuxt-link>
             <nuxt-link to="/sortiment">SORTIMENT</nuxt-link>
             <nuxt-link to="/om-oss">OM OSS</nuxt-link>
-            <nuxt-link to="/blogg">BLOGG</nuxt-link>
+            <nuxt-link to="/bloggar">BLOGG</nuxt-link>
             <nuxt-link to="https://superlistan.lindersplantskola.se/">
               SUPERLISTAN
             </nuxt-link>
@@ -118,13 +118,14 @@ useHead({
   --text-color-on-white: #412816;
   --beige-background: rgb(250, 236, 201);
   --primary: #eaac06;
+  --link-color: #f1ca67;
 }
 
 body {
   background: var(--backround-color);
   color: var(--text-color);
   margin: 0;
-  font-family: 'Helvetica Neue', 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   width: 100vw;
 }
 
