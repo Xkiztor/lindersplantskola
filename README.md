@@ -1,4 +1,10 @@
-# Nuxt 3 Minimal Starter
+# Lindersplantskola.se
+This is webite redisign of the [old website](https://lindersplantskola.se/)
+
+
+
+
+## Dev server
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
