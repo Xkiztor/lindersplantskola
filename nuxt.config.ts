@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/image-edge',
     ['@storyblok/nuxt', { accessToken: 'a32oT9XFKc0g2yhyjpiQ6Qtt' }],
+    '@nuxtjs/supabase',
   ],
   image: {
     storyblok: {

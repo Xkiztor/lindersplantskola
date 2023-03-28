@@ -52,11 +52,13 @@ useHead({
   <div>
     <div class="main-page">
       <header>
-        <img
-          src="https://lindersplantskola.se/wp/wp-content/themes/linders/library/images/logo.png"
-          alt="logo"
-          v-if="!isSmallScreen"
-        />
+        <nuxt-link to="/">
+          <img
+            src="https://lindersplantskola.se/wp/wp-content/themes/linders/library/images/logo.png"
+            alt="logo"
+            v-if="!isSmallScreen"
+          />
+        </nuxt-link>
         <nav>
           <div v-if="isSmallScreen" class="mobile-nav">
             <img
@@ -76,7 +78,7 @@ useHead({
               </nuxt-link>
             </div>
           </div>
-          <div v-else>
+          <div v-else class="nav-items">
             <nuxt-link to="/">HEM</nuxt-link>
             <nuxt-link to="/sortiment">SORTIMENT</nuxt-link>
             <nuxt-link to="/om-oss">OM OSS</nuxt-link>
@@ -154,8 +156,8 @@ p {
   max-width: 80rem;
   height: fit-content;
   box-shadow: var(--box-shadow);
-  /* background-image: var(--backround-image); */
-  background: #402814;
+  background-image: var(--backround-image);
+  /* background: #402814; */
   margin: 0 auto;
   display: grid;
   gap: 1rem;
@@ -239,7 +241,7 @@ header img {
   border-radius: 1rem;
 }
 
-.router-link-active {
+.nav-items > .router-link-active {
   background: var(--beige-background);
   color: var(--text-color-on-white);
 }
