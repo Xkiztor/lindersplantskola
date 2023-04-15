@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import '~/assets/css/reset.css';
+import '~/assets/css/main.css';
 
 const { width, height } = useWindowSize();
 
 const isSmallScreen = computed(() => {
+  console.log(width.value);
   return width.value < 700 ? true : false;
 });
 
@@ -42,6 +44,15 @@ useHead({
     {
       rel: 'stylesheet',
       href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap',
+      crossorigin: '',
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.googleapis.com',
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Inter&display=swap',
       crossorigin: '',
     },
   ],
@@ -113,19 +124,6 @@ useHead({
 </template>
 
 <style>
-:root {
-  --backround-image: url('https://lindersplantskola.se/wp/wp-content/themes/linders/library/images/bkgr.png');
-  --dotted-border: 4px dotted #6e4422;
-  --border-color: #6e4422;
-  --box-shadow: 0 0 20px #101000;
-  --backround-color: #2e1d00;
-  --text-color: #f7e8c7;
-  --text-color-on-white: #412816;
-  --beige-background: rgb(250, 236, 201);
-  --primary: #eaac06;
-  --link-color: #f1ca67;
-}
-
 body {
   background: var(--backround-color);
   color: var(--text-color);
@@ -150,6 +148,36 @@ p {
   /* font-family: 'Times New Roman', Times, serif; */
   word-spacing: 0.7px;
   line-height: 1.15;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Inter', 'Roboto', 'IBM Plex Sans', 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
+}
+
+button,
+input,
+select {
+  background: var(--beige-background);
+  color: var(--text-color-on-white);
+  border: none;
+  /* border: 1px solid var(--text-color); */
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  margin-left: 0;
+  transition: all 100ms;
+}
+
+button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(105%);
 }
 
 .main-page {
@@ -289,9 +317,6 @@ footer .bottom-legal {
 }
 
 @media screen and (min-width: 500px) {
-  .main-page {
-    /* padding: 1rem 2rem 0; */
-  }
   footer .text-stack {
     gap: 1rem;
     display: flex;

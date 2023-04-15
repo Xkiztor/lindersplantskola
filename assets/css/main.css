@@ -1,0 +1,12 @@
+:root {
+  --backround-image: url('https://lindersplantskola.se/wp/wp-content/themes/linders/library/images/bkgr.png');
+  --dotted-border: 4px dotted #6e4422;
+  --border-color: #6e4422;
+  --box-shadow: 0 0 20px #101000;
+  --backround-color: #2e1d00;
+  --text-color: #f7e8c7;
+  --text-color-on-white: #412816;
+  --beige-background: rgb(250, 236, 201);
+  --primary: #eaac06;
+  --link-color: rgb(241, 202, 103);
+}

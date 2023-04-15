@@ -68,6 +68,7 @@ const exampleList = ref([
 }
 
 .column-titles {
+  color: var(--primary);
   padding: 0.5rem;
   /* margin-top: 2rem; */
   border-bottom: 1px solid var(--border-color);

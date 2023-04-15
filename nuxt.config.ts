@@ -12,4 +12,9 @@ export default defineNuxtConfig({
       baseURL: 'https://a.storyblok.com',
     },
   },
+  runtimeConfig: {
+    public: {
+      ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
+    },
+  },
 });

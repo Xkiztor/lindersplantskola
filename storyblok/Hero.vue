@@ -29,7 +29,7 @@ defineProps({ blok: Object });
 
 .hero h1 {
   color: var(--text-color-on-white);
-  font-weight: bold;
+  font-weight: 900;
   margin-bottom: 1rem;
   font-size: 2.4rem;
 }
