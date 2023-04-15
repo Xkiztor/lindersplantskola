@@ -28,15 +28,17 @@ const expanded = ref(false);
       <p>{{ plant.Artnamn }}</p>
       <p>{{ plant.SvensktNamn }}</p>
       <!-- <p>{{ plant.Kruka }} - {{ plant.Höjd }} cm</p> -->
-      <p>{{ plant.Zon }}</p>
-      <p>{{ plant.Antal }}</p>
-      <p class="center-text">{{ plant.Pris }}kr</p>
+      <p class="hide-on-phone">{{ plant.Zon }}</p>
+      <p class="hide-on-phone">{{ plant.Antal }}</p>
+      <p class="end-text">{{ plant.Pris }}kr</p>
     </div>
     <Transition>
       <div class="expanded" v-if="expanded">
         <h1>{{ plant.Artnamn }}, {{ plant.SvensktNamn }}</h1>
         <p>Kruka: {{ plant.Kruka }}</p>
         <p v-if="plant.Höjd">Höjd: {{ plant.Höjd }} cm</p>
+        <p v-if="plant.Zon" class="hide-on-pc">Zon: {{ plant.Zon }}</p>
+        <p v-if="plant.Antal" class="hide-on-pc">{{ plant.Antal }} st</p>
       </div>
     </Transition>
   </div>

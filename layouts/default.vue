@@ -3,6 +3,17 @@ import '~/assets/css/reset.css';
 import '~/assets/css/main.css';
 
 const { width, height } = useWindowSize();
+const { width: secondWidth, height: secondHeight } = useWindowSize();
+
+onMounted(() => {
+  width.value = 1000;
+  setTimeout(function () {
+    width.value = 600;
+  }, 100);
+  setTimeout(function () {
+    width.value = secondWidth.value + 1;
+  }, 100);
+});
 
 const isSmallScreen = computed(() => {
   console.log(width.value);
@@ -63,20 +74,22 @@ useHead({
   <div>
     <div class="main-page">
       <header>
-        <nuxt-link to="/">
+        <nuxt-link to="/" :style="{ display: width < 700 ? 'none' : 'block' }">
           <img
             src="https://lindersplantskola.se/wp/wp-content/themes/linders/library/images/logo.png"
-            alt="logo"
-            v-if="!isSmallScreen"
+            alt="brand-logo"
+            v-if="width > 700"
           />
         </nuxt-link>
         <nav>
-          <div v-if="isSmallScreen" class="mobile-nav">
-            <img
-              src="https://lindersplantskola.se/wp/wp-content/themes/linders/library/images/logo.png"
-              alt="logo"
-            />
-            <button @click="isDropdownOpen = !isDropdownOpen">
+          <div v-if="width < 700" class="mobile-nav">
+            <nuxt-link to="/">
+              <img
+                src="https://lindersplantskola.se/wp/wp-content/themes/linders/library/images/logo.png"
+                alt="logo"
+              />
+            </nuxt-link>
+            <button @click.stop="isDropdownOpen = !isDropdownOpen">
               <Icon name="charm:menu-hamburger" />
             </button>
             <div class="dropdown" v-if="isDropdownOpen" ref="outsideTarget">
@@ -316,7 +329,7 @@ footer .bottom-legal {
   place-items: center;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 650px) {
   footer .text-stack {
     gap: 1rem;
     display: flex;

@@ -108,9 +108,9 @@ const updatePlant = async () => {
       <p>{{ plant.Artnamn }}</p>
       <p>{{ plant.SvensktNamn }}</p>
       <!-- <p>{{ plant.Kruka }} - {{ plant.Höjd }} cm</p> -->
-      <p>{{ plant.Zon }}</p>
-      <p>{{ plant.Antal }}</p>
-      <p class="center-text">{{ plant.Pris }}kr</p>
+      <p class="hide-on-phone">{{ plant.Zon }}</p>
+      <p class="hide-on-phone">{{ plant.Antal }}</p>
+      <p class="end-text">{{ plant.Pris }}kr</p>
     </div>
     <div v-if="expanded" @click.stop="">
       <h1>{{ plant.Artnamn }}, {{ plant.SvensktNamn }}</h1>

@@ -61,8 +61,8 @@ const sortedList = computed(() => {
         <h3>Namn</h3>
         <h3>Svenskt Namn</h3>
         <!-- <h3>Storlek</h3> -->
-        <h3>Zon</h3>
-        <h3>Antal</h3>
+        <h3 class="hide-on-phone">Zon</h3>
+        <h3 class="hide-on-phone">Antal</h3>
         <h3 class="center-text">Pris</h3>
       </div>
       <div class="list">
@@ -76,4 +76,10 @@ const sortedList = computed(() => {
   </div>
 </template>
 
-<style></style>
+<style>
+@media screen and (max-width: 700px) {
+  .hide-on-phone {
+    display: none;
+  }
+}
+</style>

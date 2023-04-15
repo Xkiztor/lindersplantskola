@@ -33,11 +33,12 @@ const exampleList = ref([
     <div class="list-wrapper">
       <div class="column-titles column-align">
         <h3>Namn</h3>
-        <h3>Svenskt Namn</h3>
+        <h3 class="hide-on-phone">Svenskt Namn</h3>
+        <h3 class="hide-on-pc">Sv. Namn</h3>
         <!-- <h3>Storlek</h3> -->
-        <h3>Zon</h3>
-        <h3>Antal</h3>
-        <h3 class="center-text">Pris</h3>
+        <h3 class="hide-on-phone">Zon</h3>
+        <h3 class="hide-on-phone">Antal</h3>
+        <h3 class="end-text">Pris</h3>
       </div>
       <div class="list">
         <SortimentElement v-for="plant in list" :plant="plant" />
@@ -63,7 +64,7 @@ const exampleList = ref([
 
 .column-align {
   /* grid-template-columns: 16fr 8fr 8fr 2fr 2fr 4fr; */
-  grid-template-columns: 16fr 8fr 3fr 3fr 4fr;
+  grid-template-columns: 16fr 8fr 4fr;
   display: grid;
 }
 
@@ -72,9 +73,27 @@ const exampleList = ref([
   padding: 0.5rem;
   /* margin-top: 2rem; */
   border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
 }
 
-.center-text {
-  /* text-align: center; */
+@media screen and (max-width: 700px) {
+  .hide-on-phone {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .hide-on-pc {
+    display: none;
+  }
+  .column-align {
+    /* grid-template-columns: 16fr 8fr 8fr 2fr 2fr 4fr; */
+    grid-template-columns: 16fr 8fr 3fr 3fr 4fr;
+    display: grid;
+  }
+}
+
+.end-text {
+  text-align: end;
 }
 </style>
