@@ -1,8 +1,21 @@
-<script setup>
+<script setup lang="ts">
 const client = useSupabaseClient();
+
+interface Plant {
+  Artnamn: string;
+  Svensktnamn: string;
+  Zon: string;
+  Antal: number;
+  Pris: number;
+  Kruka: string;
+  Höjd: string;
+  id: string;
+}
 
 const { data: list } = await useAsyncData('sortiment', async () => {
   const { data, error } = await client.from('sortiment-import').select();
+  // .eq('name', 'My Restaurant Name')
+  // .single();
   if (data) {
     console.log(data);
     return data;
@@ -24,7 +37,7 @@ const sortedList = computed(() => {
     console.log('no value');
     return [];
   } else {
-    return list.value?.sort((a, b) => {
+    return list.value?.sort((a: Plant, b: Plant) => {
       let nameA = a.Artnamn.toUpperCase();
       let nameB = b.Artnamn.toUpperCase();
       if (nameA < nameB) {
@@ -83,14 +96,7 @@ const addPlant = async () => {
   <div>
     <h1>Admin Sortiment</h1>
     <button @click="isAddingPlant = !isAddingPlant">
-      <p v-if="isAddingPlant">
-        <Icon name="material-symbols:cancel-outline-rounded" />
-        Avbryt
-      </p>
-      <p v-else>
-        <Icon name="material-symbols:add-box" />
-        Lägg till växt
-      </p>
+      {{ isAddingPlant ? 'Avbryt' : 'Lägg till växt' }}
     </button>
     <div v-if="isAddingPlant">
       <div>
@@ -121,9 +127,7 @@ const addPlant = async () => {
         <label>Kruka: </label>
         <input type="text" v-model="addingPlant.kruka" />
       </div>
-      <button @click="addPlant">
-        <Icon name="material-symbols:add-box" />Lägg till
-      </button>
+      <button @click="addPlant">Lägg till</button>
     </div>
     <div class="list-wrapper admin-list-wrapper">
       <div class="column-titles column-align">

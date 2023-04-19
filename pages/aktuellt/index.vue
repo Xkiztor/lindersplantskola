@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const { fetchAllBlogs } = useBlogs();
-const stories = await fetchAllBlogs();
+const { fetchAllNews } = useNews();
+const stories = await fetchAllNews();
 
 const textPreview = computed(() => {});
 console.log(stories);
@@ -8,10 +8,10 @@ console.log(stories);
 
 <template>
   <div class="blog-page">
-    <h1>Senaste från bloggen</h1>
+    <h1>Senaste nyheterna</h1>
     <div class="blog-grid">
-      <div v-for="blog in stories">
-        <nuxt-link :to="blog.full_slug">
+      <div v-for="blog in stories" class="post-preview">
+        <nuxt-link :to="'/' + blog.full_slug">
           <h2>{{ blog.content.title }}</h2>
         </nuxt-link>
         <nuxt-link :to="blog.full_slug">
@@ -47,24 +47,5 @@ console.log(stories);
   .blog-grid {
     grid-template-columns: 1fr 1fr 1fr;
   }
-}
-.blog-grid div {
-  background: var(--beige-background);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  color: var(--border-color);
-}
-
-.blog-grid a {
-  text-decoration: none;
-  color: var(--text-color-on-white);
-}
-
-.blog-grid img {
-  border-radius: 0.5rem;
-  width: 100%;
-  height: 12rem;
-  margin: 1rem 0 0.5rem;
-  object-fit: cover;
 }
 </style>

@@ -9,4 +9,7 @@
   --beige-background: rgb(250, 236, 201);
   --primary: #eaac06;
   --link-color: rgb(241, 202, 103);
+  --border-radius-small: 0.25rem;
+  --border-radius-medium: 0.5rem;
+  --border-radius-large: 1rem;
 }

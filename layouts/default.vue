@@ -97,6 +97,7 @@ useHead({
               <nuxt-link to="/sortiment">SORTIMENT</nuxt-link>
               <nuxt-link to="/om-oss">OM OSS</nuxt-link>
               <nuxt-link to="/bloggar">BLOGG</nuxt-link>
+              <nuxt-link to="/aktuellt">NYHETER</nuxt-link>
               <nuxt-link to="https://superlistan.lindersplantskola.se/">
                 SUPERLISTAN
               </nuxt-link>
@@ -107,6 +108,7 @@ useHead({
             <nuxt-link to="/sortiment">SORTIMENT</nuxt-link>
             <nuxt-link to="/om-oss">OM OSS</nuxt-link>
             <nuxt-link to="/bloggar">BLOGG</nuxt-link>
+            <nuxt-link to="/aktuellt">NYHETER</nuxt-link>
             <nuxt-link to="https://superlistan.lindersplantskola.se/">
               SUPERLISTAN
             </nuxt-link>
@@ -182,6 +184,7 @@ select {
   margin: 0.5rem;
   margin-left: 0;
   transition: all 100ms;
+  text-align: center;
 }
 
 button:hover {
@@ -192,6 +195,13 @@ button:hover {
 button:active {
   transform: scale(105%);
 }
+/* 
+button:has(.icon) {
+  display: grid;
+  place-items: center;
+  grid-template-columns: auto auto auto;
+  gap: 0.25rem;
+} */
 
 .main-page {
   max-width: 80rem;
@@ -202,7 +212,13 @@ button:active {
   margin: 0 auto;
   display: grid;
   gap: 1rem;
-  padding: 1rem 1rem 0;
+  padding: 0.5rem 0.25rem 0;
+}
+
+@media screen and (min-width: 500px) {
+  .main-page {
+    padding: 1rem 1rem 0;
+  }
 }
 
 .page-content {
@@ -268,7 +284,7 @@ header img {
 .dropdown {
   width: 50vw;
   position: absolute;
-  border-radius: 1rem;
+  border-radius: var(--border-radius-large);
   z-index: 5;
   right: 0;
   top: 3rem;
@@ -279,7 +295,7 @@ header img {
 }
 
 .dropdown a {
-  border-radius: 1rem;
+  border-radius: var(--border-radius-large);
 }
 
 .nav-items > .router-link-active {
@@ -355,5 +371,24 @@ footer .bottom-legal {
   .main-page {
     margin: 0 2rem;
   }
+}
+.post-preview {
+  background: var(--beige-background);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: var(--border-color);
+}
+
+.post-preview a {
+  text-decoration: none;
+  color: var(--text-color-on-white);
+}
+
+.post-preview img {
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 12rem;
+  margin: 1rem 0 0.5rem;
+  object-fit: cover;
 }
 </style>

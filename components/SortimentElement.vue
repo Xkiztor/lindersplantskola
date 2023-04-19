@@ -23,7 +23,12 @@ const expanded = ref(false);
     v-if="plant"
     :class="{ 'make-room': expanded }"
   > -->
-  <div class="list-el" @click="expanded = !expanded" v-if="plant">
+  <div
+    class="list-el"
+    @click="expanded = !expanded"
+    v-if="plant"
+    :class="{ 'make-room': expanded }"
+  >
     <div class="column-align">
       <p>{{ plant.Artnamn }}</p>
       <p>{{ plant.SvensktNamn }}</p>
@@ -46,21 +51,51 @@ const expanded = ref(false);
 
 <style>
 .list-el {
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   border-bottom: 1px solid var(--border-color);
   /* border-top: 1px solid var(--border-color); */
   cursor: pointer;
   transition: all 100ms;
   border-color: var(--border-color);
+  font-size: 0.7rem;
 }
 
 .list-el:hover {
   background: rgba(238, 172, 6, 0.2);
 }
 
+.list-el .column-align {
+  padding: 0.5rem;
+}
+
+.column-titles h3 {
+  font-size: 1.2rem;
+}
+
+@media screen and (min-width: 600px) {
+  .list-el {
+    font-size: 1.2rem;
+  }
+  .column-titles h3 {
+    font-size: 1.5rem;
+  }
+}
+
+.make-room .column-align {
+  border-bottom: 1px solid var(--border-color);
+}
+
 /* .list-el:has(.expanded) {
   margin: 1rem 0;
 } */
+
+.expanded {
+  padding: 2rem 1rem;
+}
+
+.expanded h1 {
+  font-size: 1.5rem;
+}
 
 .expanded * {
   margin-top: 0.5em;
@@ -68,8 +103,21 @@ const expanded = ref(false);
 
 .make-room {
   border: 1px solid var(--border-color);
+  /* border: 1px solid var(--primary); */
   margin: 1rem 0;
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius-medium);
+}
+
+@media screen and (min-width: 700px) {
+  .list-el .column-align {
+    padding: 0.5rem 1rem;
+  }
+  .column-titles.column-align {
+    padding: 0.5rem 1rem;
+  }
+  .expanded h1 {
+    font-size: 2rem;
+  }
 }
 
 .v-enter-active,

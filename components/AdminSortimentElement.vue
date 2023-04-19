@@ -94,7 +94,7 @@ const updatePlant = async () => {
 </script>
 
 <template>
-  <div class="list-el" v-if="plant" @click="expanded = !expanded">
+  <div class="list-el admin" v-if="plant" @click="expanded = !expanded">
     <teleport to="body">
       <div class="modal" v-if="showConfirmModal">
         <div class="modal-content">
@@ -112,13 +112,24 @@ const updatePlant = async () => {
       <p class="hide-on-phone">{{ plant.Antal }}</p>
       <p class="end-text">{{ plant.Pris }}kr</p>
     </div>
-    <div v-if="expanded" @click.stop="">
-      <h1>{{ plant.Artnamn }}, {{ plant.SvensktNamn }}</h1>
+    <div v-if="expanded" class="admin-expanded" @click.stop="">
+      <!-- <h1>{{ plant.Artnamn }}, {{ plant.SvensktNamn }}</h1> -->
       <p>Kruka: {{ plant.Kruka }}</p>
       <p v-if="plant.Höjd">Höjd: {{ plant.Höjd }} cm</p>
-      <button @click.stop="showConfirmModal = true">Ta bort</button>
+      <p v-if="plant.Zon" class="hide-on-pc">Zon: {{ plant.Zon }}</p>
+      <p v-if="plant.Antal" class="hide-on-pc">{{ plant.Antal }} st</p>
+      <button @click.stop="showConfirmModal = true">
+        <Icon name="material-symbols:delete-forever-rounded" /> Ta bort
+      </button>
       <button @click="isEditing = !isEditing">
-        {{ isEditing ? 'Avbryt' : 'Ändra' }}
+        <p v-if="isEditing">
+          <Icon name="material-symbols:cancel-outline-rounded" />
+          Avbryt
+        </p>
+        <p v-else>
+          <Icon name="material-symbols:edit" />
+          Ändra
+        </p>
       </button>
       <div v-if="isEditing" class="edit">
         <div>
@@ -195,5 +206,9 @@ const updatePlant = async () => {
 
 .edit input {
   width: 100%;
+}
+
+.admin-expanded {
+  padding: 0.5rem;
 }
 </style>
