@@ -37,6 +37,10 @@ console.log(stories);
   gap: 5rem;
 }
 
+.article-page a {
+  color: var(--link-color);
+}
+
 /* .other-blogs h1 {
   margin-bottom: 1rem;
 } */

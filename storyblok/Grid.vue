@@ -8,7 +8,7 @@ console.log(props.blok);
 <template>
   <div
     v-editable="props.blok"
-    class="grid"
+    class="grid-component"
     :style="{ gridTemplateColumns: blok.ratio, gap: blok.gap + 'rem' }"
   >
     <StoryblokComponent
@@ -20,7 +20,7 @@ console.log(props.blok);
 </template>
 
 <style>
-.grid {
+.grid-component {
   display: grid;
   /* grid-template-columns: 1fr 1fr 1fr; */
   place-items: center;

@@ -372,11 +372,13 @@ footer .bottom-legal {
     margin: 0 2rem;
   }
 }
+
 .post-preview {
   background: var(--beige-background);
   padding: 1rem;
   border-radius: 0.5rem;
   color: var(--border-color);
+  width: 100%;
 }
 
 .post-preview a {
@@ -388,7 +390,7 @@ footer .bottom-legal {
   border-radius: 0.5rem;
   width: 100%;
   height: 12rem;
-  margin: 1rem 0 0.5rem;
+  margin: 0 0 0.5rem;
   object-fit: cover;
 }
 </style>
