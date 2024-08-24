@@ -1,27 +1,96 @@
-<script setup lang="ts">
-const story = await useAsyncStoryblok('home', { version: 'draft' });
+<script setup>
+const currentNum = ref(0);
 
-console.log(story);
+const handleNext = () => {
+  if (currentNum.value + 1 === images.value.length) {
+    currentNum.value = 0;
+  } else {
+    currentNum.value += 1;
+  }
+  console.log(currentNum.value);
+};
+const handlePrevious = () => {
+  if (currentNum.value === 0) {
+    currentNum.value = images.value.length - 1;
+  } else {
+    currentNum.value -= 1;
+  }
+  console.log(currentNum.value);
+};
 
-const { fetchAllBlogs } = useBlogs();
-const blogs = await fetchAllBlogs();
+const imagesOld = [
+  'https://lindersplantskola.se/wp/wp-content/uploads/2019/08/48563-492x328.jpg',
+  'https://lindersplantskola.se/wp/wp-content/uploads/2018/12/Li_95322-492x328.jpg',
+];
 
-const { fetchAllNews } = useNews();
-const news = await fetchAllNews();
+const client = useSupabaseClient();
 
-onMounted(() => {
-  console.log(story.value);
-});
+const { data: images } = await useAsyncData(
+  'lindersplantskola-config',
+  async () => {
+    const { data, error } = await client
+      .from('lindersplantskola-config')
+      .select()
+      .eq('inställning', 'heroBilder')
+      .single();
+    if (error) console.error(error);
+
+    return JSON.parse(data.värde);
+  }
+);
+
+console.log(images.value);
 </script>
 
 <template>
   <div class="home-page">
+    <div class="hero hero-grid">
+      <div class="carousel-container">
+        <Slide
+          v-for="(image, index) in images"
+          :image="image"
+          :index="index"
+          :current-num="currentNum"
+        />
+        <div class="button-overlay">
+          <button @click="handlePrevious()" class="subtract">
+            <Icon name="material-symbols:arrow-back-rounded" />
+          </button>
+          <button @click="handleNext()" class="add">
+            <Icon name="material-symbols:arrow-forward-rounded" />
+          </button>
+        </div>
+      </div>
+      <div>
+        <h1>Välkommen till plantskolan!</h1>
+        <h2>
+          Linders Plantskola är en småskalig och hantverksmässig plantskola
+          strax utanför Hörby.
+        </h2>
+        <h2>
+          Här finns många ovanliga växter att se i arboretumet och köpa i
+          plantskolan. Välkomna!
+        </h2>
+      </div>
+    </div>
     <!-- <StoryblokComponent v-if="story" :blok="story.content" /> -->
-    <StoryblokComponent v-if="story" :blok="story.content" />
     <div class="home-page-align">
-      <div class="latest-from-blog">
+      <article>
+        <header><h1>Öpptetider</h1></header>
+        <section>
+          <p>
+            Vi har öppet alla lördagar i maj och september kl.11-15. Juni, juli
+            och augusti är det sommarstängt. Men om ni är några stycken i en
+            grupp kan ni höra av er och se om jag är hemma för spontanbesök.
+          </p>
+        </section>
+      </article>
+      <article>
         <h1>Senast från bloggen</h1>
-        <!-- <div class="latest">
+      </article>
+      <!-- <div class="latest-from-blog">
+        <h1>Senast från bloggen</h1>
+        <div class="latest">
           <div class="blog-preview">
             <nuxt-link :to="blogs[0].full_slug">
               <h2>{{ blogs[0].content.title }}</h2>
@@ -33,11 +102,11 @@ onMounted(() => {
               {{ blogs[0].content.description }}
             </p>
           </div>
-        </div> -->
+        </div>
       </div>
       <div class="latest-from-news">
         <h1>Senaste nyheten</h1>
-        <!-- <div class="latest">
+        <div class="latest">
           <div class="blog-preview">
             <nuxt-link :to="news[0].full_slug">
               <h2>{{ news[0].content.title }}</h2>
@@ -49,8 +118,8 @@ onMounted(() => {
               {{ news[0].content.description }}
             </p>
           </div>
-        </div> -->
-      </div>
+        </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -67,11 +136,15 @@ onMounted(() => {
 .home-page-align {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  padding-top: 1rem;
 }
 
-.home-page-align > div {
-  padding-top: 1rem;
+.home-page-align > article {
+  padding: 3rem;
+  padding-top: 2rem;
+}
+.home-page-align > :first-child {
+  border-right: var(--dotted-border);
 }
 
 .home-page-align h1 {
@@ -79,5 +152,137 @@ onMounted(() => {
   text-decoration: underline;
   text-align: center;
   margin-bottom: 1rem;
+}
+
+.hero {
+  background: var(--beige-background);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  /* height: 17rem; */
+}
+
+.hero h1 {
+  color: var(--text-color-on-white);
+  font-weight: 900;
+  margin-bottom: 1rem;
+  font-size: 2.4rem;
+}
+
+.hero h2 {
+  font-size: 1.5rem;
+  color: var(--border-color);
+  margin-top: 1rem;
+}
+
+.hero-grid {
+  display: grid;
+  gap: 1rem;
+  place-items: center;
+  grid-template-rows: 1fr min-content;
+  grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 700px) {
+  .hero.hero-grid {
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero h2 {
+    font-size: 1.5rem;
+  }
+  .hero h1 {
+    margin-bottom: 2rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .hero .hero-grid {
+    gap: 3rem;
+  }
+}
+
+.carousel-image {
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 0.5rem;
+  /* width: 80vw; */
+  /* max-height: 100%; */
+  /* max-width: 50vw; */
+  /* min-height: 100%; */
+}
+
+@media screen and (min-width: 700px) {
+  .carousel-image {
+    object-fit: cover;
+    width: 100%;
+    height: 25rem;
+  }
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+}
+
+.button-overlay {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.button-overlay button {
+  width: 1.7rem;
+  height: 2.4rem;
+  border: none;
+  background: var(--beige-background);
+  color: var(--text-color-on-white);
+}
+.button-overlay:not(.arrow-background) button {
+  background: none;
+  color: white;
+  width: 3rem;
+}
+.button-overlay:not(.arrow-background) button:hover {
+  color: rgb(184, 184, 184);
+}
+.button-overlay:not(.arrow-background) button svg {
+  -webkit-filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.7));
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 1));
+  scale: 200%;
+}
+
+.button-overlay button svg {
+  scale: 150%;
+}
+
+.button-overlay button:hover {
+  color: var(--border-color);
+}
+
+.button-overlay .add {
+  place-self: center end;
+  border-radius: 10rem 0 0 10rem;
+  translate: 0.5rem;
+}
+.button-overlay .subtract {
+  place-self: center start;
+  border-radius: 0 10rem 10rem 0;
+  translate: -0.5rem;
+}
+
+.carousel-enter-active,
+.carousel-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.carousel-enter-from,
+.carousel-leave-to {
+  opacity: 0;
+  position: absolute;
 }
 </style>

@@ -18,7 +18,7 @@ console.log(props.blok?.blog);
     <nuxt-link :to="story.full_slug">
       <img :src="story.content.preview.filename" alt="" />
     </nuxt-link>
-    <nuxt-link :to="'/' + story.full_slug">
+    <nuxt-link class="spacer" :to="'/' + story.full_slug">
       <h2>{{ story.content.title }}</h2>
     </nuxt-link>
     <p>

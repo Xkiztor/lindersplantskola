@@ -54,16 +54,17 @@ useHead({
     },
     {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap',
+      href: 'https://fonts.googleapis.com/css2?family=Merriweather&display=swap',
       crossorigin: '',
     },
     {
-      rel: 'preconnect',
-      href: 'https://fonts.googleapis.com',
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap',
+      crossorigin: '',
     },
     {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Inter&display=swap',
+      href: 'https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap',
       crossorigin: '',
     },
   ],
@@ -108,7 +109,7 @@ useHead({
             <nuxt-link to="/sortiment">SORTIMENT</nuxt-link>
             <nuxt-link to="/om-oss">OM OSS</nuxt-link>
             <nuxt-link to="/bloggar">BLOGG</nuxt-link>
-            <nuxt-link to="/aktuellt">NYHETER</nuxt-link>
+            <!-- <nuxt-link to="/aktuellt">NYHETER</nuxt-link> -->
             <nuxt-link to="https://superlistan.lindersplantskola.se/">
               SUPERLISTAN
             </nuxt-link>
@@ -143,12 +144,13 @@ body {
   background: var(--backround-color);
   color: var(--text-color);
   margin: 0;
-  font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Merriweather', 'Times New Roman', Times, serif;
   width: 100vw;
 }
 
 h1 {
   font-size: 2rem;
+  letter-spacing: -1px;
 }
 
 h2 {
@@ -166,15 +168,15 @@ p {
 }
 
 h1,
-h2,
-h3 {
-  font-family: 'Inter', 'Roboto', 'IBM Plex Sans', 'Helvetica Neue', Helvetica,
-    Arial, sans-serif;
+.title {
+  font-family: 'Cabin Sketch', 'Alfa Slab One', 'Merriweather',
+    'Times New Roman', Times, serif;
 }
 
 button,
 input,
-select {
+select,
+textarea {
   background: var(--beige-background);
   color: var(--text-color-on-white);
   border: none;
@@ -183,8 +185,13 @@ select {
   padding: 0.5rem;
   margin: 0.5rem;
   margin-left: 0;
-  transition: all 100ms;
   text-align: center;
+}
+
+button,
+input,
+select {
+  transition: all 100ms;
 }
 
 button:hover {
@@ -204,7 +211,7 @@ button:has(.icon) {
 } */
 
 .main-page {
-  max-width: 80rem;
+  max-width: 85rem;
   height: fit-content;
   box-shadow: var(--box-shadow);
   background-image: var(--backround-image);
@@ -233,6 +240,7 @@ nav {
   padding: 0.5rem 0;
   display: flex;
   gap: 1rem;
+  letter-spacing: 1px;
 }
 
 nav a {
@@ -358,7 +366,7 @@ footer .bottom-legal {
 
 @media screen and (min-width: 800px) {
   .main-page {
-    padding: 1rem 5rem 0;
+    padding: 1rem 7rem 0;
   }
 }
 
@@ -374,16 +382,16 @@ footer .bottom-legal {
 }
 
 .post-preview {
-  background: var(--beige-background);
+  /* background: var(--beige-background); */
   padding: 1rem;
   border-radius: 0.5rem;
-  color: var(--border-color);
+  color: var(--text-color);
   width: 100%;
 }
 
 .post-preview a {
   text-decoration: none;
-  color: var(--text-color-on-white);
+  color: #fff;
 }
 
 .post-preview img {
@@ -392,5 +400,9 @@ footer .bottom-legal {
   height: 12rem;
   margin: 0 0 0.5rem;
   object-fit: cover;
+}
+
+.post-preview a.spacer * {
+  margin-bottom: 0.5rem;
 }
 </style>

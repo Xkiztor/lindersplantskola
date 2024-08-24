@@ -22,7 +22,6 @@ console.log(props.blok);
 <style>
 .grid-component {
   display: grid;
-  /* grid-template-columns: 1fr 1fr 1fr; */
   place-items: center;
 }
 </style>

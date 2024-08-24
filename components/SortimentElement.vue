@@ -51,7 +51,7 @@ const expanded = ref(false);
 
 <style>
 .list-el {
-  /* padding: 0.5rem; */
+  padding: 0.4rem;
   border-bottom: 1px solid var(--border-color);
   /* border-top: 1px solid var(--border-color); */
   cursor: pointer;
@@ -74,7 +74,7 @@ const expanded = ref(false);
 
 @media screen and (min-width: 600px) {
   .list-el {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   .column-titles h3 {
     font-size: 1.5rem;
@@ -110,10 +110,10 @@ const expanded = ref(false);
 
 @media screen and (min-width: 700px) {
   .list-el .column-align {
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
   }
   .column-titles.column-align {
-    padding: 0.5rem 1rem;
+    padding: 0.2rem 1rem;
   }
   .expanded h1 {
     font-size: 2rem;

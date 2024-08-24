@@ -1,4 +1,5 @@
 :root {
+  /* --backround-image: url('https://oykwqfkocubjvrixrunf.supabase.co/storage/v1/object/public/bilder/bkgr-01.svg'); */
   --backround-image: url('https://lindersplantskola.se/wp/wp-content/themes/linders/library/images/bkgr.png');
   --dotted-border: 4px dotted #6e4422;
   --border-color: #6e4422;

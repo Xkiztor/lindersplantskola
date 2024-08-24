@@ -92,32 +92,32 @@ const addPlant = async () => {
         Lägg till växt
       </p>
     </button>
-    <div v-if="isAddingPlant">
-      <div>
+    <div v-if="isAddingPlant" class="add-plant">
+      <div class="align-column">
         <label>Artnamn: </label>
         <input type="text" v-model="addingPlant.artnamn" />
       </div>
-      <div>
+      <div class="align-column">
         <label>Svenskt Namn: </label>
         <input type="text" v-model="addingPlant.svensktNamn" />
       </div>
-      <div>
+      <div class="align-column">
         <label>Pris: </label>
         <input type="text" v-model="addingPlant.pris" />
       </div>
-      <div>
+      <div class="align-column">
         <label>Antal: </label>
         <input type="text" v-model="addingPlant.antal" />
       </div>
-      <div>
+      <div class="align-column">
         <label>Zon: </label>
         <input type="text" v-model="addingPlant.zon" />
       </div>
-      <div>
+      <div class="align-column">
         <label>Höjd: </label>
         <input type="text" v-model="addingPlant.höjd" />
       </div>
-      <div>
+      <div class="align-column">
         <label>Kruka: </label>
         <input type="text" v-model="addingPlant.kruka" />
       </div>
@@ -150,7 +150,7 @@ const addPlant = async () => {
 </template>
 
 <style>
-.admin-list-wrapper .list-el .column-align {
+.admin-list-wrapper .list-el .align-column {
   padding: 0 0.5rem;
 }
 
@@ -158,5 +158,12 @@ const addPlant = async () => {
   .hide-on-phone {
     display: none;
   }
+}
+
+.add-plant .align-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 30rem;
+  place-items: center start;
 }
 </style>

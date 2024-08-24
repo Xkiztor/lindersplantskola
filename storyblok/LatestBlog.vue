@@ -6,6 +6,8 @@ const story = await fetchBlogBySlug(props.blok?.blog as string);
 
 const { fetchAllBlogs } = useBlogs();
 const blogs = await fetchAllBlogs();
+
+console.log(blogs);
 </script>
 
 <template>
@@ -20,16 +22,19 @@ const blogs = await fetchAllBlogs();
       {{ story.content.description }}
     </p>
   </div> -->
-  <div v-editable="props.blok" class="post-preview">
-    <nuxt-link :to="blogs[0].full_slug">
-      <img :src="blogs[0].content.preview.filename" alt="" />
-    </nuxt-link>
-    <nuxt-link :to="blogs[0].full_slug">
-      <h2>{{ blogs[0].content.title }}</h2>
-    </nuxt-link>
-    <p>
-      {{ blogs[0].content.description }}
-    </p>
+  <div>
+    <h1>Senast från bloggen</h1>
+    <div v-editable="props.blok" class="post-preview">
+      <nuxt-link :to="blogs[0].full_slug">
+        <img :src="blogs[0].content.preview.filename" alt="" />
+      </nuxt-link>
+      <nuxt-link class="spacer" :to="blogs[0].full_slug">
+        <h2>{{ blogs[0].content.title }}</h2>
+      </nuxt-link>
+      <p>
+        {{ blogs[0].content.description }}
+      </p>
+    </div>
   </div>
 </template>
 

@@ -4,17 +4,12 @@ const props = defineProps(['image', 'index', 'currentNum']);
 
 <template>
   <!-- <Transition name="slide"> -->
-  <nuxt-img
+  <img
     v-if="currentNum === props.index"
-    :src="props.image.filename"
-    alt=""
+    :src="props.image"
     class="carousel-image"
     width="200"
     height="100"
-    quality="70"
-    provider="storyblok"
-    format="jpeg"
-    sizes="sm:100vw md:50vw lg:800px"
   />
   <!-- </Transition> -->
 </template>

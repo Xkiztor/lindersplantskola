@@ -10,26 +10,46 @@ const { data: list } = await useAsyncData('sortiment', async () => {
 
 console.log(list.value);
 
-const exampleList = ref([
-  { name: 'Abelia chinensis', count: 3 },
-  { name: 'Abelia mosanensis', count: 4 },
-  { name: 'Euphorbia Blackbird', count: 1 },
-  { name: 'Fagus sylvatica', count: 2 },
-  { name: 'Fallopia baldschuanica', count: 10 },
-  { name: 'Fargesia denudata', count: 120 },
-  { name: 'Fargesia rufa', count: 3 },
-  { name: 'Festuca gautieri', count: 5 },
-  { name: 'Ginkgo biloba', count: 3 },
-  { name: 'Glyceria maxima', count: 4 },
-  { name: 'Helictrotrichon sempervirens', count: 3 },
-  { name: 'Molinia caerulea', count: 3 },
-  { name: 'Morus nigra', count: 8 },
-]);
+const searchQuery = ref('');
+
+const filteredList = computed(() => {
+  let newList = list.value;
+
+  let queryArray = searchQuery.value.toLowerCase().split(' ');
+
+  console.log(queryArray);
+
+  // let svensktNamnFilter = newList.filter((item) =>
+  //   // (item) => item.SvensktNamn.toLowerCase().includes(queryArray)
+  //   // console.log(item.SvensktNamn.toLowerCase())
+  // );
+
+  // let svensktNamnFilter = newList.filter((item) =>
+  //   queryArray.every((str) => item.SvensktNamn.toLowerCase().includes(str))
+  // );
+
+  let artnamnFilter = list.value.filter((item) =>
+    queryArray.every((str) => item.Artnamn.toLowerCase().includes(str))
+  );
+
+  // const combinedArray = artnamnFilter.concat(svensktNamnFilter);
+
+  // const uniqueArray = [...new Set(combinedArray)];
+
+  return artnamnFilter;
+});
 </script>
 
 <template>
-  <div>
-    <h1>Sortiment</h1>
+  <div class="sortiment">
+    <div class="top-part">
+      <h1>Sortiment</h1>
+      <div class="filters">
+        <div>
+          <input type="text" placeholder="Sök" v-model="searchQuery" />
+        </div>
+      </div>
+    </div>
     <div class="list-wrapper">
       <div class="column-titles column-align">
         <h3>Namn</h3>
@@ -41,7 +61,7 @@ const exampleList = ref([
         <h3 class="end-text">Pris</h3>
       </div>
       <div class="list">
-        <SortimentElement v-for="plant in list" :plant="plant" />
+        <SortimentElement v-for="plant in filteredList" :plant="plant" />
         <!-- <div v-for="plant in list" class="list-el column-align">
           <p>{{ plant.Artnamn }}</p>
           <p>{{ plant.Pris }} kr</p>
@@ -95,5 +115,13 @@ const exampleList = ref([
 
 .end-text {
   text-align: end;
+}
+
+.sortiment .top-part {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>

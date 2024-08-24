@@ -24,7 +24,7 @@ const news = await fetchAllNews();
     <nuxt-link :to="news[0].full_slug">
       <img :src="news[0].content.preview.filename" alt="" />
     </nuxt-link>
-    <nuxt-link :to="news[0].full_slug">
+    <nuxt-link class="spacer" :to="news[0].full_slug">
       <h2>{{ news[0].content.title }}</h2>
     </nuxt-link>
     <p>
