@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
+      MAILCHIMP: process.env.MAILCHIMP,
     },
   },
 });

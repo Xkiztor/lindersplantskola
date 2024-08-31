@@ -61,32 +61,35 @@ console.log(images.value);
           </button>
         </div>
       </div>
-      <div>
+      <div class="content">
         <h1>Välkommen till plantskolan!</h1>
         <h2>
           Linders Plantskola är en småskalig och hantverksmässig plantskola
-          strax utanför Hörby.
+          strax utanför Hörby, mitt i vackra Skåne.
         </h2>
         <h2>
           Här finns många ovanliga växter att se i arboretumet och köpa i
-          plantskolan. Välkomna!
+          plantskolan.
         </h2>
+        <h2>Välkomna!</h2>
       </div>
     </div>
     <!-- <StoryblokComponent v-if="story" :blok="story.content" /> -->
     <div class="home-page-align">
       <article>
-        <header><h1>Öpptetider</h1></header>
+        <header><h1>Öppettider</h1></header>
         <section>
           <p>
-            Vi har öppet alla lördagar i maj och september kl.11-15. Juni, juli
-            och augusti är det sommarstängt. Men om ni är några stycken i en
-            grupp kan ni höra av er och se om jag är hemma för spontanbesök.
+            2024 har vi har öppet alla lördagar i maj och september kl.11-15.
+            Juni, juli och augusti är det sommarstängt. Men om ni är några
+            stycken i en grupp kan ni höra av er och se om jag är hemma för
+            spontanbesök.
           </p>
         </section>
       </article>
       <article>
-        <h1>Senast från bloggen</h1>
+        <h1>Nyhetsbrev</h1>
+        <Mailchimp />
       </article>
       <!-- <div class="latest-from-blog">
         <h1>Senast från bloggen</h1>
@@ -125,6 +128,10 @@ console.log(images.value);
 </template>
 
 <style>
+.home-page p {
+  line-height: 1.3em;
+}
+
 .home-page .grid-component .post-preview {
   height: 100%;
 }
@@ -149,7 +156,6 @@ console.log(images.value);
 
 .home-page-align h1 {
   color: var(--text-color);
-  text-decoration: underline;
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -169,17 +175,22 @@ console.log(images.value);
 }
 
 .hero h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: var(--border-color);
   margin-top: 1rem;
+  line-height: 1.7rem;
 }
 
 .hero-grid {
   display: grid;
-  gap: 1rem;
+  gap: 3rem;
   place-items: center;
   grid-template-rows: 1fr min-content;
   grid-template-columns: 1fr;
+}
+
+.hero-grid .content {
+  padding-right: 2rem;
 }
 
 @media screen and (min-width: 700px) {
@@ -188,7 +199,7 @@ console.log(images.value);
     grid-template-columns: 1fr 1fr;
   }
   .hero h2 {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
   }
   .hero h1 {
     margin-bottom: 2rem;
@@ -217,7 +228,7 @@ console.log(images.value);
   .carousel-image {
     object-fit: cover;
     width: 100%;
-    height: 25rem;
+    height: 20rem;
   }
 }
 
