@@ -65,7 +65,13 @@ const expanded = ref(false);
 }
 
 .list-el .column-align {
-  padding: 0.5rem;
+  padding: 0.1rem;
+}
+
+@media screen and (min-width: 700px) {
+  .list-el .column-align {
+    padding: 0.5rem;
+  }
 }
 
 .column-titles h3 {
@@ -76,13 +82,17 @@ const expanded = ref(false);
   .list-el {
     font-size: 1.1rem;
   }
-  .column-titles h3 {
-    font-size: 1.5rem;
+}
+
+@media screen and (max-width: 380px) {
+  .list-el {
+    font-size: 0.6rem;
   }
 }
 
 .make-room .column-align {
-  border-bottom: 1px solid var(--border-color);
+  /* border-bottom: 1px solid var(--border-color); */
+  margin-top: 0.5rem;
 }
 
 /* .list-el:has(.expanded) {
@@ -112,9 +122,7 @@ const expanded = ref(false);
   .list-el .column-align {
     padding: 0 1rem;
   }
-  .column-titles.column-align {
-    padding: 0.2rem 1rem;
-  }
+
   .expanded h1 {
     font-size: 2rem;
   }
@@ -122,7 +130,7 @@ const expanded = ref(false);
 
 .v-enter-active,
 .v-leave-active {
-  transition: all 0.15s ease;
+  transition: all 150ms ease;
   /* position: absolute; */
 }
 
@@ -130,5 +138,7 @@ const expanded = ref(false);
 .v-leave-to {
   /* transform: translateY(-100px); */
   opacity: 0;
+  height: 0;
+  position: absolute;
 }
 </style>

@@ -6,6 +6,10 @@ const heroBilderSaved = ref(false);
 
 const heroBilderInput = ref();
 
+watch(heroBilderInput, () => {
+  heroBilderSaved.value = false;
+});
+
 const heroBilderUpdate = async () => {
   console.log('updating');
 
@@ -50,6 +54,7 @@ const { data: images } = await useAsyncData(
       <textarea type="text" v-model="heroBilderInput" />
       {{ images }}
       <button @click="heroBilderUpdate()">Spara</button>
+      <p class="saved" v-if="heroBilderSaved">Sparad!</p>
     </div>
   </div>
 </template>

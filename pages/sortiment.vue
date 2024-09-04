@@ -42,12 +42,10 @@ const filteredList = computed(() => {
 
 <template>
   <div class="sortiment">
-    <div class="top-part">
-      <h1>Sortiment</h1>
-      <div class="filters">
-        <div>
-          <input type="text" placeholder="Sök" v-model="searchQuery" />
-        </div>
+    <h1 class="title">Sortiment</h1>
+    <div class="filters">
+      <div>
+        <input type="text" placeholder="Sök" v-model="searchQuery" />
       </div>
     </div>
     <div class="list-wrapper">
@@ -94,6 +92,20 @@ const filteredList = computed(() => {
   /* margin-top: 2rem; */
   border-bottom: 1px solid var(--border-color);
   white-space: nowrap;
+  position: sticky;
+  /* height: 2rem; */
+  top: 0;
+  background: var(--backround-image);
+}
+
+.column-titles h3 {
+  /* font-size: 2rem; */
+}
+
+@media screen and (min-width: 600px) {
+  .column-titles h3 {
+    font-size: 1.8rem;
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -111,6 +123,9 @@ const filteredList = computed(() => {
     grid-template-columns: 16fr 8fr 3fr 3fr 4fr;
     display: grid;
   }
+  .column-titles.column-align {
+    padding: 1rem 1rem 0.5rem;
+  }
 }
 
 .end-text {
@@ -123,5 +138,11 @@ const filteredList = computed(() => {
   gap: 2.5rem;
   align-items: center;
   justify-content: space-between;
+}
+
+@media screen and (min-width: 700px) {
+  .sortiment .title {
+    font-size: 2.5rem;
+  }
 }
 </style>

@@ -88,8 +88,8 @@ console.log(images.value);
         </section>
       </article>
       <article>
-        <h1>Nyhetsbrev</h1>
-        <Mailchimp />
+        <!-- <h1>Nyhetsbrev</h1> -->
+        <!-- <Mailchimp /> -->
       </article>
       <!-- <div class="latest-from-blog">
         <h1>Senast från bloggen</h1>
@@ -142,16 +142,24 @@ console.log(images.value);
 
 .home-page-align {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   padding-top: 1rem;
+}
+
+@media screen and (min-width: 700px) {
+  .home-page-align {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 1rem;
+  }
+  .home-page-align > :first-child {
+    border-right: var(--dotted-border);
+  }
 }
 
 .home-page-align > article {
   padding: 3rem;
   padding-top: 2rem;
-}
-.home-page-align > :first-child {
-  border-right: var(--dotted-border);
 }
 
 .home-page-align h1 {
@@ -175,7 +183,7 @@ console.log(images.value);
 }
 
 .hero h2 {
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: var(--border-color);
   margin-top: 1rem;
   line-height: 1.7rem;
@@ -183,7 +191,7 @@ console.log(images.value);
 
 .hero-grid {
   display: grid;
-  gap: 3rem;
+  gap: 1rem;
   place-items: center;
   grid-template-rows: 1fr min-content;
   grid-template-columns: 1fr;
@@ -195,11 +203,13 @@ console.log(images.value);
 
 @media screen and (min-width: 700px) {
   .hero.hero-grid {
+    gap: 3rem;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;
   }
   .hero h2 {
-    font-size: 1.35rem;
+    font-size: 1rem;
+    line-height: 1.2rem;
   }
   .hero h1 {
     margin-bottom: 2rem;
@@ -207,8 +217,24 @@ console.log(images.value);
 }
 
 @media screen and (min-width: 1000px) {
+  .hero h2 {
+    font-size: 1.2rem;
+    line-height: 1.7rem;
+  }
   .hero .hero-grid {
     gap: 3rem;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .hero h2 {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .hero h1 {
+    font-size: 1.75rem;
   }
 }
 
@@ -216,7 +242,6 @@ console.log(images.value);
   width: 100%;
   height: 18rem;
   object-fit: cover;
-  width: 100%;
   border-radius: 0.5rem;
   /* width: 80vw; */
   /* max-height: 100%; */

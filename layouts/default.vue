@@ -93,12 +93,16 @@ useHead({
             <button @click.stop="isDropdownOpen = !isDropdownOpen">
               <Icon name="charm:menu-hamburger" />
             </button>
-            <div class="dropdown" v-if="isDropdownOpen" ref="outsideTarget">
+            <div
+              class="dropdown"
+              v-if="isDropdownOpen"
+              ref="outsideTarget"
+              @click="isDropdownOpen = false"
+            >
               <nuxt-link to="/">HEM</nuxt-link>
               <nuxt-link to="/sortiment">SORTIMENT</nuxt-link>
-              <nuxt-link to="/om-oss">OM OSS</nuxt-link>
+              <!-- <nuxt-link to="/om-oss">OM OSS</nuxt-link> -->
               <nuxt-link to="/bloggar">BLOGG</nuxt-link>
-              <nuxt-link to="/aktuellt">NYHETER</nuxt-link>
               <nuxt-link to="https://superlistan.lindersplantskola.se/">
                 SUPERLISTAN
               </nuxt-link>
@@ -107,7 +111,7 @@ useHead({
           <div v-else class="nav-items">
             <nuxt-link to="/">HEM</nuxt-link>
             <nuxt-link to="/sortiment">SORTIMENT</nuxt-link>
-            <nuxt-link to="/om-oss">OM OSS</nuxt-link>
+            <!-- <nuxt-link to="/om-oss">OM OSS</nuxt-link> -->
             <nuxt-link to="/bloggar">BLOGG</nuxt-link>
             <!-- <nuxt-link to="/aktuellt">NYHETER</nuxt-link> -->
             <nuxt-link to="https://superlistan.lindersplantskola.se/">
@@ -121,15 +125,37 @@ useHead({
       <!-- </div> -->
       <footer>
         <div>
-          <a href="https://lindersplantskola.se/"
-            ><img src="/logo_footer.png" alt="logo"
-          /></a>
-          <p>Glada och ovanliga växter från egen ekologisk odling.</p>
-          <div class="text-stack">
-            <p>Peter Linder</p>
-            <p>tel: 0733-518 716</p>
-            <p>peter@lindersplantskola.se</p>
+          <div>
+            <a href="https://lindersplantskola.se/"
+              ><img src="/logo_footer.png" alt="logo"
+            /></a>
+            <p>Glada och ovanliga växter från egen ekologisk odling.</p>
+            <div class="text-stack">
+              <p>Peter Linder</p>
+              <p>tel: 0733-518 716</p>
+              <p>peter@lindersplantskola.se</p>
+              <p>
+                Köinge 6902, Hörby <i class="max700">- </i>
+                <NuxtLink to="./om-oss/hitta-hit" class="hitta-hit max700"
+                  >Hitta hit</NuxtLink
+                >
+              </p>
+              <p>
+                <a
+                  href="https://www.facebook.com/LindersPlantskola"
+                  target="_blank"
+                  ><Icon name="mdi:facebook-box"
+                /></a>
+                <a href="https://www.instagram.com/fotodendron/" target="_blank"
+                  ><Icon name="mdi:instagram"
+                /></a>
+              </p>
+            </div>
           </div>
+          <NuxtLink to="/om-oss/hitta-hit" class="hitta-hit big">
+            <Icon name="material-symbols:file-map-rounded" />
+            <h2>Hitta hit</h2>
+          </NuxtLink>
         </div>
         <div class="bottom-legal">
           <p>© {{ year }} Linders Plantskola</p>
@@ -140,12 +166,16 @@ useHead({
 </template>
 
 <style>
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   background: var(--backround-color);
   color: var(--text-color);
   margin: 0;
   font-family: 'Merriweather', 'Times New Roman', Times, serif;
-  width: 100vw;
+  width: 100%;
 }
 
 h1 {
@@ -168,9 +198,14 @@ p {
 }
 
 h1,
-.title {
-  font-family: 'Cabin Sketch', 'Alfa Slab One', 'Merriweather',
-    'Times New Roman', Times, serif;
+.title,
+.column-titles {
+  font-family: var(--title-font);
+}
+
+.article .title {
+  color: var(--primary);
+  font-size: 2.5rem;
 }
 
 button,
@@ -202,7 +237,7 @@ button:hover {
 button:active {
   transform: scale(105%);
 }
-/* 
+/*
 button:has(.icon) {
   display: grid;
   place-items: center;
@@ -248,12 +283,15 @@ nav a {
   text-decoration: none;
   padding: 0.3rem 0.5rem;
   margin: 0;
-  margin-left: 3px;
+  /* margin-left: 3px; */
+  margin-right: 0.5rem;
+  transition: all 150ms ease-in-out;
+  border-left: 3px solid transparent;
 }
 
 nav a:hover {
   border-left: 3px solid var(--primary);
-  margin-left: 0;
+  /* margin-left: 0; */
   background: var(--beige-background);
   color: var(--text-color-on-white);
 }
@@ -324,24 +362,37 @@ header img {
 footer {
   border-top: var(--dotted-border);
   padding: 1rem 0 0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+}
+
+footer a {
+  color: var(--text-color);
+}
+
+footer > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
 }
 
 footer .text-stack {
+  margin-top: 0.5rem;
   display: grid;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-footer > div > * {
-  margin: 0 0 0.5rem 0;
-}
-
-footer .text-stack * {
-  padding-right: 0.5rem;
+footer .text-stack p {
+  padding-right: 1rem;
 }
 
 footer .text-stack *:last-child {
   border-right: none;
+}
+
+footer .text-stack .icon {
+  font-size: 1.3rem;
+  margin-right: 0.25rem;
+  transform: translate(0, -2px);
 }
 
 footer .bottom-legal {
@@ -351,14 +402,47 @@ footer .bottom-legal {
   padding-top: 1rem;
   display: grid;
   place-items: center;
+  margin-bottom: 0.5rem;
 }
 
-@media screen and (min-width: 650px) {
+footer .hitta-hit {
+  color: var(--text-color);
+}
+footer .hitta-hit.big {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding-left: 2rem;
+}
+
+@media screen and (max-width: 700px) {
+  footer .hitta-hit.big {
+    display: none;
+  }
+}
+@media screen and (min-width: 700px) {
+  .max700 {
+    display: none;
+  }
+}
+
+footer .hitta-hit h2 {
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+footer .hitta-hit .icon {
+  font-size: 3rem;
+}
+
+@media screen and (min-width: 700px) {
   footer .text-stack {
-    gap: 1rem;
+    gap: 0.5rem 1rem;
     display: flex;
   }
-  footer .text-stack * {
+  footer .text-stack > * {
     padding-right: 1rem;
     border-right: 3px solid var(--text-color);
   }
