@@ -3,7 +3,9 @@
 <template>
   <div class="article">
     <h1 class="title">Hitta hit</h1>
-    <h1 class="subtitle">Köinge 6902, Hörby 242 92</h1>
+    <a href="https://maps.app.goo.gl/fJe2UufN3xotQrbS6" target="_blank">
+      <h1 class="subtitle">Köinge 6902, Hörby 242 92</h1>
+    </a>
     <p>
       Linders Plantskola hittar du i Köinge ca 4,5 km sydöst om Hörby. Köinge
       finns på två ställen. Detta är ”Köinge by”, det Köinge som ligger närmast
@@ -31,5 +33,9 @@
 .article p {
   margin-top: 0.5rem;
   max-width: 50ch;
+}
+
+.article a {
+  color: var(--link-color);
 }
 </style>

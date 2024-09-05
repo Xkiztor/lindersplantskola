@@ -71,6 +71,7 @@ const date = computed(() => {
         <h1>{{ slug }}</h1>
         <p>{{ date }}</p>
       </header>
+      <p class="ingress">{{ blog.ingress }}</p>
       <div v-for="string in separatedString">
         <!-- <img :src="string" :alt="string" ref="image" v-if="checkIfLink(string)" @click="logFunc($refs.image[0].height)"> -->
         <!-- <img :src="string" :alt="string" ref="image"
@@ -124,6 +125,11 @@ const date = computed(() => {
   /* border-bottom: 1px solid var(--border-color); */
   margin-bottom: 1rem;
   padding-bottom: 1rem;
+}
+
+.article-page .ingress {
+  margin-bottom: 1rem;
+  font-weight: 800;
 }
 
 /* .other-blogs h1 {

@@ -298,6 +298,7 @@ nav a:hover {
 
 header img {
   max-width: 80vw;
+  margin-left: 5px;
 }
 
 .mobile-nav {

@@ -39,9 +39,12 @@ const expanded = ref(false);
     </div>
     <Transition>
       <div class="expanded" v-if="expanded">
-        <h1>{{ plant.Artnamn }}, {{ plant.SvensktNamn }}</h1>
-        <p>Kruka: {{ plant.Kruka }}</p>
-        <p v-if="plant.Höjd">Höjd: {{ plant.Höjd }} cm</p>
+        <h1>
+          {{ plant.Artnamn }}{{ plant.SvensktNamn ? ', ' : ''
+          }}{{ plant.SvensktNamn }}
+        </h1>
+        <p v-if="plant.Höjd">Nuvarande höjd: {{ plant.Höjd }} cm</p>
+        <p v-if="plant.Kruka">Kruka: {{ plant.Kruka }}</p>
         <p v-if="plant.Zon" class="hide-on-pc">Zon: {{ plant.Zon }}</p>
         <p v-if="plant.Antal" class="hide-on-pc">{{ plant.Antal }} st</p>
       </div>

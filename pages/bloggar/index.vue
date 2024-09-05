@@ -104,6 +104,10 @@ const getImage = (text) => {
   text-decoration: underline;
 }
 
+.blog-grid .blog-el a {
+  text-decoration: none;
+}
+
 .blog-grid .blog-el img {
   border-radius: 0.5rem;
   width: 100%;

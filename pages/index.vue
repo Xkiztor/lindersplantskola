@@ -80,10 +80,8 @@ console.log(images.value);
         <header><h1>Öppettider</h1></header>
         <section>
           <p>
-            2024 har vi har öppet alla lördagar i maj och september kl.11-15.
-            Juni, juli och augusti är det sommarstängt. Men om ni är några
-            stycken i en grupp kan ni höra av er och se om jag är hemma för
-            spontanbesök.
+            2024 har vi har öppet alla lördagar i maj och september kl.11-15. Då
+            är även Esters café öppet. Välkomna!
           </p>
         </section>
       </article>

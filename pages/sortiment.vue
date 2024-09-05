@@ -2,8 +2,7 @@
 const client = useSupabaseClient();
 
 const { data: list } = await useAsyncData('sortiment', async () => {
-  const { data } = await client.from('sortiment-import').select();
-  // .eq('name', 'My Restaurant Name')
+  const { data } = await client.from('sortiment').select().eq('Dold', 'FALSE');
   // .single();
   return data;
 });
