@@ -5,6 +5,7 @@ const { data: blogs } = await useAsyncData(
   async () => {
     const { data, error } = await client
       .from('lindersplantskola-bloggar')
+      .eq('dold', 'false')
       .select()
       .order('createdAt', { ascending: false });
     if (error) console.error(error);

@@ -77,7 +77,7 @@ useHead({
       <header>
         <nuxt-link to="/" :style="{ display: width < 700 ? 'none' : 'block' }">
           <img
-            src="https://lindersplantskola.se/wp/wp-content/themes/linders/library/images/logo.png"
+            src="https://lindersplantskola.s3.eu-north-1.amazonaws.com/hemsida-assets/logo.png"
             alt="brand-logo"
             v-if="width > 700"
           />
@@ -86,7 +86,7 @@ useHead({
           <div v-if="width < 700" class="mobile-nav">
             <nuxt-link to="/">
               <img
-                src="https://lindersplantskola.se/wp/wp-content/themes/linders/library/images/logo.png"
+                src="https://lindersplantskola.s3.eu-north-1.amazonaws.com/hemsida-assets/logo.png"
                 alt="logo"
               />
             </nuxt-link>
