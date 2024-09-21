@@ -2,21 +2,31 @@
 const client = useSupabaseClient();
 
 const { data: list } = await useAsyncData('sortiment', async () => {
-  const { data } = await client.from('sortiment').select().eq('Dold', 'FALSE');
+  const { data, error } = await client
+    .from('sortiment')
+    .select()
+    .order('Artnamn', { ascending: true })
+    .eq('Dold', 'FALSE');
   // .single();
+  if (error) {
+    console.error(error);
+  }
+  console.log(data);
   return data;
 });
 
 console.log(list.value);
 
-const searchQuery = ref('');
+const vetenQuery = ref('');
+const svenskQuery = ref('');
 
 const filteredList = computed(() => {
   let newList = list.value;
 
-  let queryArray = searchQuery.value.toLowerCase().split(' ');
+  let vetenArray = vetenQuery.value.toLowerCase().split(' ');
+  let svenskArray = svenskQuery.value.toLowerCase().split(' ');
 
-  console.log(queryArray);
+  // console.log(queryArray);
 
   // let svensktNamnFilter = newList.filter((item) =>
   //   // (item) => item.SvensktNamn.toLowerCase().includes(queryArray)
@@ -27,30 +37,62 @@ const filteredList = computed(() => {
   //   queryArray.every((str) => item.SvensktNamn.toLowerCase().includes(str))
   // );
 
-  let artnamnFilter = list.value.filter((item) =>
-    queryArray.every((str) => item.Artnamn.toLowerCase().includes(str))
+  let vetenFilter = list.value.filter((item) =>
+    vetenArray.every((str) => item.Artnamn.toLowerCase().includes(str))
+  );
+  let svenskFilter = vetenFilter.filter((item) =>
+    svenskArray.every((str) => item.SvensktNamn.toLowerCase().includes(str))
   );
 
   // const combinedArray = artnamnFilter.concat(svensktNamnFilter);
 
   // const uniqueArray = [...new Set(combinedArray)];
 
-  return artnamnFilter;
+  return svenskFilter;
 });
 </script>
 
 <template>
   <div class="sortiment">
-    <h1 class="title">Sortiment</h1>
-    <div class="filters">
-      <div>
-        <input type="text" placeholder="Sök" v-model="searchQuery" />
+    <div class="top-align">
+      <h1 class="title">Sortiment</h1>
+      <div class="filters">
+        <div>
+          <p>Vetenskapligt namn</p>
+          <div class="close-align">
+            <input
+              :class="{ inputed: vetenQuery }"
+              type="text"
+              placeholder="Sök"
+              v-model="vetenQuery"
+            />
+            <button v-if="vetenQuery" @click="vetenQuery = ''">
+              <Icon name="material-symbols-light:close-rounded" />
+            </button>
+          </div>
+        </div>
+        <div>
+          <p>Svenskt namn</p>
+          <div class="close-align">
+            <input
+              :class="{ inputed: svenskQuery }"
+              type="text"
+              placeholder="Sök"
+              v-model="svenskQuery"
+            />
+            <button v-if="svenskQuery" @click="svenskQuery = ''">
+              <Icon name="material-symbols-light:close-rounded" />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="list-wrapper">
       <div class="column-titles column-align">
-        <h3>Namn</h3>
-        <h3 class="hide-on-phone">Svenskt Namn</h3>
+        <h3 :class="{ searched: vetenQuery }">Namn</h3>
+        <h3 :class="{ searched: svenskQuery }" class="hide-on-phone">
+          Svenskt Namn
+        </h3>
         <h3 class="hide-on-pc">Sv. Namn</h3>
         <!-- <h3>Storlek</h3> -->
         <h3 class="hide-on-phone">Zon</h3>
@@ -97,8 +139,55 @@ const filteredList = computed(() => {
   background: var(--backround-image);
 }
 
-.column-titles h3 {
-  /* font-size: 2rem; */
+.column-titles .searched {
+  text-decoration: underline 3px;
+}
+
+.end-text {
+  text-align: end;
+}
+
+.sortiment .top-part {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sortiment .filters input {
+  text-align: left;
+  border: 2px solid transparent;
+}
+.sortiment .filters .close-align {
+  position: relative;
+}
+
+.sortiment .filters button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  aspect-ratio: 1/1;
+  background: none;
+  font-size: 1.5rem;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+}
+
+.filters input.inputed {
+  border-color: var(--primary);
+}
+
+@media screen and (min-width: 400px) {
+  .filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
 }
 
 @media screen and (min-width: 600px) {
@@ -123,25 +212,21 @@ const filteredList = computed(() => {
     display: grid;
   }
   .column-titles.column-align {
-    padding: 1rem 1rem 0.5rem;
+    padding: 1rem 1.4rem 0.5rem;
   }
-}
-
-.end-text {
-  text-align: end;
-}
-
-.sortiment .top-part {
-  display: flex;
-  flex-direction: row;
-  gap: 2.5rem;
-  align-items: center;
-  justify-content: space-between;
-}
-
-@media screen and (min-width: 700px) {
+  .top-align {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .filters {
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 0;
+  }
   .sortiment .title {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
   }
 }
 </style>

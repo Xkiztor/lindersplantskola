@@ -1,6 +1,24 @@
 <script setup>
 const client = useSupabaseClient();
 
+const { data: images } = await useAsyncData(
+  'lindersplantskola-config',
+  async () => {
+    const { data, error } = await client
+      .from('lindersplantskola-config')
+      .select()
+      .eq('inställning', 'heroBilder')
+      .single();
+    if (error) console.error(error);
+    if (data) {
+      console.log(data);
+      heroBilderInput.value = data.värde;
+    }
+
+    return data.värde;
+  }
+);
+
 // ------------ heroBilder ----------------
 const heroBilderSaved = ref(false);
 
@@ -25,25 +43,10 @@ const heroBilderUpdate = async () => {
     heroBilderSaved.value = true;
   }
 };
-
-const { data: images } = await useAsyncData(
-  'lindersplantskola-config',
-  async () => {
-    const { data, error } = await client
-      .from('lindersplantskola-config')
-      .select()
-      .eq('inställning', 'heroBilder')
-      .single();
-    if (error) console.error(error);
-    if (data) {
-      console.log(data);
-      heroBilderInput.value = data.värde;
-    }
-
-    return data.värde;
-  }
-);
 // --------------------
+
+// ------------ heroText ----------------
+const heroTextSaved = ref(false);
 </script>
 
 <template>
@@ -51,6 +54,14 @@ const { data: images } = await useAsyncData(
     <div>
       <h2>Bilder i bildkarusselen</h2>
       <p>Format: ["https", "https"]</p>
+      <textarea type="text" v-model="heroBilderInput" />
+      {{ images }}
+      <button @click="heroBilderUpdate()">Spara</button>
+      <p class="saved" v-if="heroBilderSaved">Sparad!</p>
+    </div>
+    <div>
+      <h2>Beskrivning brevid bildkarussel</h2>
+      <p>Format:</p>
       <textarea type="text" v-model="heroBilderInput" />
       {{ images }}
       <button @click="heroBilderUpdate()">Spara</button>

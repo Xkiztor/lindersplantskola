@@ -2,7 +2,7 @@
 const client = useSupabaseClient();
 
 const { data: list } = await useAsyncData('sortiment', async () => {
-  const { data, error } = await client.from('sortiment-import').select();
+  const { data, error } = await client.from('sortiment').select();
   if (data) {
     console.log(data);
     return data;
