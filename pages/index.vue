@@ -26,12 +26,25 @@ const imagesOld = [
 const client = useSupabaseClient();
 
 const { data: images } = await useAsyncData(
-  'lindersplantskola-config',
+  'lindersplantskola-images',
   async () => {
     const { data, error } = await client
       .from('lindersplantskola-config')
       .select()
       .eq('inställning', 'heroBilder')
+      .single();
+    if (error) console.error(error);
+
+    return JSON.parse(data.värde);
+  }
+);
+const { data: heroText } = await useAsyncData(
+  'lindersplantskola-text',
+  async () => {
+    const { data, error } = await client
+      .from('lindersplantskola-config')
+      .select()
+      .eq('inställning', 'heroText')
       .single();
     if (error) console.error(error);
 
@@ -63,15 +76,18 @@ console.log(images.value);
       </div>
       <div class="content">
         <h1>Välkommen till plantskolan!</h1>
-        <h2>
-          Linders Plantskola är en småskalig och hantverksmässig plantskola
-          strax utanför Hörby, mitt i vackra Skåne.
-        </h2>
-        <h2>
-          Här finns många ovanliga växter att se i arboretumet och köpa i
-          plantskolan.
-        </h2>
-        <h2>Välkomna!</h2>
+        <RichText element="h2" :content="heroText" />
+        <div class="seo">
+          <h2>
+            Linders Plantskola är en småskalig och hantverksmässig plantskola
+            strax utanför Hörby, mitt i vackra Skåne.
+          </h2>
+          <h2>
+            Här finns många ovanliga växter att se i arboretumet och köpa i
+            plantskolan.
+          </h2>
+          <h2>Välkomna!</h2>
+        </div>
       </div>
     </div>
     <!-- <StoryblokComponent v-if="story" :blok="story.content" /> -->
@@ -81,7 +97,11 @@ console.log(images.value);
         <section>
           <p>
             2024 har vi har öppet alla lördagar i maj och september kl.11-15. Då
-            är även Esters café öppet. Välkomna!
+            är även Esters café öppet.
+          </p>
+          <p class="bold">OBS! Lördag 28 sep. är sista öppetdagen 2024.</p>
+          <p class="bold">
+            Gratis rundvisning i arboretet kl 12. Våfflor i caféet. Välkomna!
           </p>
         </section>
       </article>
@@ -307,6 +327,17 @@ console.log(images.value);
   place-self: center start;
   border-radius: 0 10rem 10rem 0;
   translate: -0.5rem;
+}
+
+.seo {
+  position: absolute;
+  opacity: 0;
+}
+
+html .seo * {
+  font-size: 0.1rem !important;
+  margin: 0;
+  line-height: 0;
 }
 
 .carousel-enter-active,

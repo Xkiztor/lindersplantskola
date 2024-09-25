@@ -69,6 +69,16 @@ useHead({
     },
   ],
 });
+
+useSeoMeta({
+  title: 'Lindersplantskola',
+  ogTitle: 'Plantskola',
+  description: 'Småskalig och hantverksmässig plantskola strax utanför Hörby.',
+  ogDescription:
+    'Småskalig och hantverksmässig plantskola strax utanför Hörby.',
+  ogImage:
+    'https://lindersplantskola.s3.eu-north-1.amazonaws.com/hemsida-assets/ogImage.jpg',
+});
 </script>
 
 <template>
@@ -195,6 +205,10 @@ p {
   /* font-family: 'Times New Roman', Times, serif; */
   word-spacing: 0.7px;
   line-height: 1.15;
+}
+
+.bold {
+  font-weight: 800;
 }
 
 h1,
