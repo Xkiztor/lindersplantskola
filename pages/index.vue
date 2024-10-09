@@ -96,13 +96,9 @@ console.log(images.value);
         <header><h1>Öppettider</h1></header>
         <section>
           <p>
-            2024 har vi har öppet alla lördagar i maj och september kl.11-15. Då
-            är även Esters café öppet.
+            Vi har öppet alla lördagar i maj och september kl. 11-15.
           </p>
-          <p class="bold">OBS! Lördag 28 sep. är sista öppetdagen 2024.</p>
-          <p class="bold">
-            Gratis rundvisning i arboretet kl 12. Våfflor i caféet. Välkomna!
-          </p>
+          <p>Vi ses 2025!</p>
         </section>
       </article>
       <article>
