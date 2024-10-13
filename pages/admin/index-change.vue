@@ -33,7 +33,7 @@ const heroTextSaved = ref(false);
 const heroTextInput = ref();
 
 watch(heroTextInput, () => {
-  heroBilderSaved.value = false;
+  heroTextSaved.value = false;
 });
 
 const heroTextUpdate = async () => {
@@ -54,7 +54,34 @@ const heroTextUpdate = async () => {
 
 // --------------------------
 
-const { data: images } = await useAsyncData(
+// ------------ öppetTider ----------------
+const öppetTiderSaved = ref(false);
+
+const öppetTiderInput = ref();
+
+watch(heroTextInput, () => {
+  öppetTiderSaved.value = false;
+});
+
+const öppetTiderUpdate = async () => {
+  console.log('updating');
+
+  const { data, error } = await client
+    .from('lindersplantskola-config')
+    // .update({ värde: `test` })
+    .update({ värde: `${öppetTiderInput.value}` })
+    .eq('inställning', 'öppetTider')
+    .select();
+  if (error) console.error(error);
+  if (data) {
+    console.log(data);
+    öppetTiderSaved.value = true;
+  }
+};
+
+// --------------------------
+
+const { data: settings } = await useAsyncData(
   'lindersplantskola-config',
   async () => {
     const { data, error } = await client
@@ -75,6 +102,10 @@ const { data: images } = await useAsyncData(
       heroTextInput.value = data.filter(
         (e) => e.inställning === 'heroText'
       )[0].värde;
+
+      öppetTiderInput.value = data.filter(
+        (e) => e.inställning === 'öppetTider'
+      )[0].värde;
     }
 
     return data.värde;
@@ -88,7 +119,6 @@ const { data: images } = await useAsyncData(
       <h2>Bilder i bildkarusselen</h2>
       <p>Format: ["https", "https"]</p>
       <textarea type="text" v-model="heroBilderInput" />
-      {{ images }}
       <div class="save">
         <button @click="heroBilderUpdate()">Spara</button>
         <p class="saved" v-if="heroBilderSaved">Sparad!</p>
@@ -98,7 +128,6 @@ const { data: images } = await useAsyncData(
       <h2>Beskrivning brevid bildkarussel</h2>
       <p>Format:</p>
       <textarea type="text" v-model="heroTextInput" />
-      {{ images }}
       <div class="save">
         <button @click="heroTextUpdate()">Spara</button>
         <p class="saved" v-if="heroTextSaved">Sparad!</p>
@@ -107,11 +136,10 @@ const { data: images } = await useAsyncData(
     <div class="inställning">
       <h2>Öppetider</h2>
       <p>Format:</p>
-      <textarea type="text" v-model="heroTextInput" />
-      {{ images }}
+      <textarea type="text" v-model="öppetTiderInput" />
       <div class="save">
-        <button @click="heroTextUpdate()">Spara</button>
-        <p class="saved" v-if="heroTextSaved">Sparad!</p>
+        <button @click="öppetTiderUpdate()">Spara</button>
+        <p class="saved" v-if="öppetTiderSaved">Sparad!</p>
       </div>
     </div>
   </div>

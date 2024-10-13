@@ -39,12 +39,26 @@ const { data: images } = await useAsyncData(
   }
 );
 const { data: heroText } = await useAsyncData(
-  'lindersplantskola-text',
+  'lindersplantskola-heroText',
   async () => {
     const { data, error } = await client
       .from('lindersplantskola-config')
       .select()
       .eq('inställning', 'heroText')
+      .single();
+    if (error) console.error(error);
+
+    return JSON.parse(data.värde);
+  }
+);
+
+const { data: öppetTider } = await useAsyncData(
+  'lindersplantskola-öppetTider',
+  async () => {
+    const { data, error } = await client
+      .from('lindersplantskola-config')
+      .select()
+      .eq('inställning', 'öppetTider')
       .single();
     if (error) console.error(error);
 
@@ -95,10 +109,7 @@ console.log(images.value);
       <article>
         <header><h1>Öppettider</h1></header>
         <section>
-          <p>
-            Vi har öppet alla lördagar i maj och september kl. 11-15.
-          </p>
-          <p>Vi ses 2025!</p>
+          <RichText element="p" :content="öppetTider" />
         </section>
       </article>
       <article>
