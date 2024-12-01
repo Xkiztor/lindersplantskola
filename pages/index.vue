@@ -18,11 +18,6 @@ const handlePrevious = () => {
   console.log(currentNum.value);
 };
 
-const imagesOld = [
-  'https://lindersplantskola.se/wp/wp-content/uploads/2019/08/48563-492x328.jpg',
-  'https://lindersplantskola.se/wp/wp-content/uploads/2018/12/Li_95322-492x328.jpg',
-];
-
 const client = useSupabaseClient();
 
 const { data: images } = await useAsyncData(
@@ -106,26 +101,26 @@ console.log(images.value);
     </div>
     <!-- <StoryblokComponent v-if="story" :blok="story.content" /> -->
     <div class="home-page-align">
-      <article>
+      <article alt="Vi har öppet alla lördagar i maj och september kl. 11-15.">
         <header><h1>Öppettider</h1></header>
         <section>
           <RichText element="p" :content="öppetTider" />
         </section>
       </article>
-      <article>
-        <!-- <h1>Nyhetsbrev</h1> -->
-        <!-- <Mailchimp /> -->
-      </article>
+      <!-- <article>
+        <h1>Nyhetsbrev</h1>
+        <Mailchimp />
+      </article> -->
       <!-- <div class="latest-from-blog">
         <h1>Senast från bloggen</h1>
         <div class="latest">
           <div class="blog-preview">
-            <nuxt-link :to="blogs[0].full_slug">
+            <NuxtLink :to="blogs[0].full_slug">
               <h2>{{ blogs[0].content.title }}</h2>
-            </nuxt-link>
-            <nuxt-link :to="blogs[0].full_slug">
+            </NuxtLink>
+            <NuxtLink :to="blogs[0].full_slug">
               <img :src="blogs[0].content.preview.filename" alt="" />
-            </nuxt-link>
+            </NuxtLink>
             <p>
               {{ blogs[0].content.description }}
             </p>
@@ -136,12 +131,12 @@ console.log(images.value);
         <h1>Senaste nyheten</h1>
         <div class="latest">
           <div class="blog-preview">
-            <nuxt-link :to="news[0].full_slug">
+            <NuxtLink :to="news[0].full_slug">
               <h2>{{ news[0].content.title }}</h2>
-            </nuxt-link>
-            <nuxt-link :to="news[0].full_slug">
+            </NuxtLink>
+            <NuxtLink :to="news[0].full_slug">
               <img :src="news[0].content.preview.filename" alt="" />
-            </nuxt-link>
+            </NuxtLink>
             <p>
               {{ news[0].content.description }}
             </p>
@@ -168,7 +163,13 @@ console.log(images.value);
 .home-page-align {
   display: grid;
   grid-template-columns: 1fr;
-  padding-top: 1rem;
+}
+
+@media screen and (max-width: 700px) {
+  .home-page-align {
+    margin-top: 1rem;
+    border-top: var(--dotted-border);
+  }
 }
 
 @media screen and (min-width: 700px) {
@@ -183,8 +184,15 @@ console.log(images.value);
 }
 
 .home-page-align > article {
-  padding: 3rem;
-  padding-top: 2rem;
+  padding: 2rem 2rem 1rem;
+  /* padding-top: 2rem; */
+}
+
+@media screen and (min-width: 700px) {
+  .home-page-align > article {
+    padding: 3rem;
+    padding-top: 2rem;
+  }
 }
 
 .home-page-align h1 {

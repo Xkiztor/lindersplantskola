@@ -158,7 +158,16 @@ const filteredList = computed(() => {
 .sortiment .filters input {
   text-align: left;
   border: 2px solid transparent;
+  width: 100%;
+  padding: 0.35rem;
 }
+
+@media screen and (min-width: 400px) {
+  .sortiment .filters input {
+    padding: 0.5rem;
+  }
+}
+
 .sortiment .filters .close-align {
   position: relative;
 }
@@ -181,12 +190,15 @@ const filteredList = computed(() => {
   border-color: var(--primary);
 }
 
+.filters {
+  margin-top: 1rem;
+}
+
 @media screen and (min-width: 400px) {
   .filters {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 1rem;
   }
 }
 

@@ -1,15 +1,15 @@
 <script setup>
 const client = useSupabaseClient();
 const { data: blogs } = await useAsyncData(
-  'lindersplantskola-blogs',
+  'lindersplantskola-bloggar',
   async () => {
     const { data, error } = await client
       .from('lindersplantskola-bloggar')
-      .eq('dold', 'false')
       .select()
-      .order('createdAt', { ascending: false });
-    if (error) console.error(error);
+      .order('post_date', { ascending: false });
+    // .eq('hidden', false)
     console.log(data);
+    if (error) console.error(error);
 
     return data;
   }
@@ -31,6 +31,17 @@ const getImage = (text) => {
 
   return firstUrl;
 };
+
+const renderDate = (date) => {
+  var rawDate = new Date(date);
+  var options = {
+    weekday: 'short',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  };
+  return rawDate.toLocaleDateString('sv', options);
+};
 </script>
 
 <template>
@@ -40,24 +51,25 @@ const getImage = (text) => {
       <div
         class="blog-el"
         v-for="blog in blogs"
-        @click="navigateTo(`./bloggar/${blog.titel}`)"
+        @click="navigateTo(`./bloggar/${blog.title.replaceAll(' ', '+')}`)"
       >
-        <img :src="getImage(blog.text)" v-if="getImage(blog.text)" alt="" />
-        <nuxt-link :to="`./bloggar/${blog.titel}`">
-          <h1>{{ blog.titel }}</h1>
-        </nuxt-link>
-        <p>{{ blog.text.slice(0, 100) }}</p>
+        <!-- <img :src="getImage(blog.text)" v-if="getImage(blog.text)" alt="" /> -->
+        <NuxtLink :to="`./bloggar/${blog.title.replaceAll(' ', '+')}`">
+          <h1>{{ blog.title }}</h1>
+        </NuxtLink>
+        <p class="date">{{ renderDate(blog.post_date) }}</p>
+        <p>{{ blog.content.slice(0, 100) }}</p>
       </div>
 
-      <!-- <nuxt-link :to="`./bloggar/${blog.titel}`" v-for="blog in blogs">
+      <!-- <NuxtLink :to="`./bloggar/${blog.titel}`" v-for="blog in blogs">
         <div class="blog-el">
           <img :src="getImage(blog.text)" v-if="getImage(blog.text)" alt="" />
-          <nuxt-link :to="`./bloggar/${blog.titel}`">
+          <NuxtLink :to="`./bloggar/${blog.titel}`">
             <h1>{{ blog.titel }}</h1>
-          </nuxt-link>
+          </NuxtLink>
           <p>{{ blog.text.slice(0, 100) }}</p>
         </div>
-      </nuxt-link> -->
+      </NuxtLink> -->
     </div>
   </div>
 </template>
@@ -81,6 +93,7 @@ const getImage = (text) => {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
+
 .blog-grid .blog-el {
   height: fit-content;
   /* background: var(--beige-background); */
@@ -89,17 +102,15 @@ const getImage = (text) => {
   /* color: var(--border-color); */
   color: var(--text-color);
   border: 1px solid var(--border-color);
+  height: 100%;
 
   cursor: pointer;
-}
-
-.blog-grid .blog-el {
   text-decoration: none;
-  /* color: var(--text-color-on-white); */
 }
 
 .blog-grid .blog-el h1 {
   color: var(--link-color);
+  font-size: 1.6rem;
 }
 .blog-grid .blog-el:has(> h1):hover {
   text-decoration: underline;
@@ -115,5 +126,14 @@ const getImage = (text) => {
   height: 12rem;
   margin: 0 0 0.5rem;
   object-fit: cover;
+}
+
+.blog-grid .blog-el .date {
+  margin: 0.2rem 0 0.6rem;
+  color: var(--text-color-mute);
+}
+
+.blog-grid .blog-el p {
+  opacity: 0.9;
 }
 </style>
