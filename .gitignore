@@ -10,3 +10,5 @@ dist
 localhost.pem
 localhost-key.pem
 *.pem
+extensions.txt
+desktop.ini
