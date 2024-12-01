@@ -82,6 +82,7 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
             v-if="windowSize.width > 700"
           />
         </nuxt-link>
+
         <nav>
           <div v-if="windowSize.width < 700" class="mobile-nav">
             <nuxt-link to="/">
@@ -114,6 +115,7 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
               </nuxt-link>
             </div>
           </div>
+
           <div v-else class="nav-items">
             <nuxt-link to="/">HEM</nuxt-link>
             <nuxt-link to="/sortiment">SORTIMENT</nuxt-link>
@@ -123,6 +125,15 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
             <nuxt-link to="https://superlistan.lindersplantskola.se/">
               SUPERLISTAN
             </nuxt-link>
+          </div>
+          <div
+            v-if="
+              windowSize.width > 700 &&
+              enteredPassword === runtimeConfig.public.ADMIN_PASSWORD
+            "
+            class="admin-items"
+          >
+            <nuxt-link to="/admin">Admin</nuxt-link>
           </div>
         </nav>
       </header>
@@ -285,6 +296,7 @@ nav {
   border-top: var(--dotted-border);
   padding: 0.5rem 0;
   display: flex;
+  justify-content: space-between;
   gap: 1rem;
   letter-spacing: 1px;
 }

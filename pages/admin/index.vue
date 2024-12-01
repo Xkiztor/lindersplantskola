@@ -13,6 +13,7 @@ definePageMeta({
     <button @click="navigateTo('/admin/sortiment-change')">
       Ändra sortiment
     </button>
+    <button @click="navigateTo('/admin/blogg')">Lägg till blogg</button>
     <button @click="navigateTo('/admin/index-change')">Ändra förstasida</button>
     <button @click="enteredPassword = ''">Logga ut</button>
   </div>
