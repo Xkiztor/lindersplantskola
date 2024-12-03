@@ -51,6 +51,10 @@ useHead({
       href: 'https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap',
       crossorigin: '',
     },
+    {
+      rel: 'canonical',
+      href: 'https://lindersplantskola.se',
+    },
   ],
 });
 
@@ -59,7 +63,7 @@ useSeoMeta({
   ogTitle: 'Plantskola',
   description: 'Småskalig och hantverksmässig plantskola strax utanför Hörby.',
   ogDescription: 'Småskalig och hantverksmässig plantskola strax utanför Hörby.',
-  ogImage: 'https://lindersplantskola.s3.eu-north-1.amazonaws.com/hemsida-assets/ogImage.jpg',
+  ogImage: 'https://lindersplantskola.s3.eu-north-1.amazonaws.com/FlygfotoPlantskolanDownscaled',
 });
 
 const runtimeConfig = useRuntimeConfig();
@@ -81,9 +85,15 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
         <nav>
           <div v-if="windowSize.width < 700" class="mobile-nav">
             <nuxt-link to="/">
-              <img src="https://lindersplantskola.s3.eu-north-1.amazonaws.com/hemsida-assets/logo.png" alt="logo" />
+              <img
+                src="https://lindersplantskola.s3.eu-north-1.amazonaws.com/hemsida-assets/logo.png"
+                alt="logo"
+              />
             </nuxt-link>
-            <button ref="outsideTarget" @click="isDropdownOpen ? (isDropdownOpen = false) : (isDropdownOpen = true)">
+            <button
+              ref="outsideTarget"
+              @click="isDropdownOpen ? (isDropdownOpen = false) : (isDropdownOpen = true)"
+            >
               <Icon name="charm:menu-hamburger" />
             </button>
             <div class="dropdown" v-if="isDropdownOpen" @click="isDropdownOpen = false">
@@ -103,7 +113,10 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
             <!-- <nuxt-link to="/aktuellt">NYHETER</nuxt-link> -->
             <nuxt-link to="https://superlistan.lindersplantskola.se/"> SUPERLISTAN </nuxt-link>
           </div>
-          <div v-if="windowSize.width > 700 && enteredPassword === runtimeConfig.public.ADMIN_PASSWORD" class="admin-items">
+          <div
+            v-if="windowSize.width > 700 && enteredPassword === runtimeConfig.public.ADMIN_PASSWORD"
+            class="admin-items"
+          >
             <nuxt-link to="/admin">Admin</nuxt-link>
           </div>
         </nav>
@@ -126,8 +139,12 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
                 <NuxtLink to="/om-oss/hitta-hit" class="hitta-hit max700">Hitta hit</NuxtLink>
               </p>
               <p>
-                <a href="https://www.facebook.com/LindersPlantskola" target="_blank"><Icon name="mdi:facebook-box" /></a>
-                <a href="https://www.instagram.com/fotodendron/" target="_blank"><Icon name="mdi:instagram" /></a>
+                <a href="https://www.facebook.com/LindersPlantskola" target="_blank"
+                  ><Icon name="mdi:facebook-box"
+                /></a>
+                <a href="https://www.instagram.com/fotodendron/" target="_blank"
+                  ><Icon name="mdi:instagram"
+                /></a>
               </p>
             </div>
           </div>

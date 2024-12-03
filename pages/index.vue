@@ -20,48 +20,47 @@ const handlePrevious = () => {
 
 const client = useSupabaseClient();
 
-const { data: images } = await useAsyncData(
-  'lindersplantskola-images',
-  async () => {
-    const { data, error } = await client
-      .from('lindersplantskola-config')
-      .select()
-      .eq('inställning', 'heroBilder')
-      .single();
-    if (error) console.error(error);
+const { data: images } = await useAsyncData('lindersplantskola-images', async () => {
+  const { data, error } = await client
+    .from('lindersplantskola-config')
+    .select()
+    .eq('inställning', 'heroBilder')
+    .single();
+  if (error) console.error(error);
 
-    return JSON.parse(data.värde);
-  }
-);
-const { data: heroText } = await useAsyncData(
-  'lindersplantskola-heroText',
-  async () => {
-    const { data, error } = await client
-      .from('lindersplantskola-config')
-      .select()
-      .eq('inställning', 'heroText')
-      .single();
-    if (error) console.error(error);
+  return JSON.parse(data.värde);
+});
+const { data: heroText } = await useAsyncData('lindersplantskola-heroText', async () => {
+  const { data, error } = await client
+    .from('lindersplantskola-config')
+    .select()
+    .eq('inställning', 'heroText')
+    .single();
+  if (error) console.error(error);
 
-    return JSON.parse(data.värde);
-  }
-);
+  return JSON.parse(data.värde);
+});
 
-const { data: öppetTider } = await useAsyncData(
-  'lindersplantskola-öppetTider',
-  async () => {
-    const { data, error } = await client
-      .from('lindersplantskola-config')
-      .select()
-      .eq('inställning', 'öppetTider')
-      .single();
-    if (error) console.error(error);
+const { data: öppetTider } = await useAsyncData('lindersplantskola-öppetTider', async () => {
+  const { data, error } = await client
+    .from('lindersplantskola-config')
+    .select()
+    .eq('inställning', 'öppetTider')
+    .single();
+  if (error) console.error(error);
 
-    return JSON.parse(data.värde);
-  }
-);
+  return JSON.parse(data.värde);
+});
 
 console.log(images.value);
+
+useSeoMeta({
+  title: 'Linders Plantskola',
+  ogTitle: 'Plantskola',
+  description: 'Småskalig och hantverksmässig plantskola strax utanför Hörby.',
+  ogDescription: 'Småskalig och hantverksmässig plantskola strax utanför Hörby.',
+  ogImage: 'https://lindersplantskola.s3.eu-north-1.amazonaws.com/FlygfotoPlantskolanDownscaled',
+});
 </script>
 
 <template>
@@ -88,13 +87,10 @@ console.log(images.value);
         <RichText element="h2" :content="heroText" />
         <div class="seo">
           <h2>
-            Linders Plantskola är en småskalig och hantverksmässig plantskola
-            strax utanför Hörby, mitt i vackra Skåne.
+            Linders Plantskola är en småskalig och hantverksmässig plantskola strax utanför Hörby,
+            mitt i vackra Skåne.
           </h2>
-          <h2>
-            Här finns många ovanliga växter att se i arboretumet och köpa i
-            plantskolan.
-          </h2>
+          <h2>Här finns många ovanliga växter att se i arboretumet och köpa i plantskolan.</h2>
           <h2>Välkomna!</h2>
         </div>
       </div>
