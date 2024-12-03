@@ -18,5 +18,8 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  site: { url: 'https://lindersplantskola.se/', name: 'Linders plantskola' },
+
   // compatibilityDate: '2024-12-01',
 });
