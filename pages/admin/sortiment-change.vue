@@ -53,7 +53,7 @@ const addingPlant = reactive({
 
 const addPlant = async () => {
   const { data, error } = await client
-    .from('sortiment-import')
+    .from('sortiment')
     .insert({
       Artnamn: addingPlant.artnamn,
       SvensktNamn: addingPlant.svensktNamn,
@@ -121,9 +121,7 @@ const addPlant = async () => {
         <label>Kruka: </label>
         <input type="text" v-model="addingPlant.kruka" />
       </div>
-      <button @click="addPlant">
-        <Icon name="material-symbols:add-box" />Lägg till
-      </button>
+      <button @click="addPlant"><Icon name="material-symbols:add-box" />Lägg till</button>
     </div>
     <div class="list-wrapper admin-list-wrapper">
       <div class="column-titles column-align">

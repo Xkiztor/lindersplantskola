@@ -50,6 +50,14 @@ const filteredList = computed(() => {
 
   return svenskFilter;
 });
+
+useSeoMeta({
+  title: 'Sortiment - Linders Plantskola',
+  ogTitle: 'Sortiment',
+  description: 'Här kan bläddra runt bland vårt sortiment.',
+  ogDescription:
+    'Här kan du se vårt sortiment. Vi har ett brett sortiment av växter, främst ligoser.',
+});
 </script>
 
 <template>
@@ -90,9 +98,7 @@ const filteredList = computed(() => {
     <div class="list-wrapper">
       <div class="column-titles column-align">
         <h3 :class="{ searched: vetenQuery }">Namn</h3>
-        <h3 :class="{ searched: svenskQuery }" class="hide-on-phone">
-          Svenskt Namn
-        </h3>
+        <h3 :class="{ searched: svenskQuery }" class="hide-on-phone">Svenskt Namn</h3>
         <h3 class="hide-on-pc">Sv. Namn</h3>
         <!-- <h3>Storlek</h3> -->
         <h3 class="hide-on-phone">Zon</h3>

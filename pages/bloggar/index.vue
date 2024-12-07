@@ -1,19 +1,16 @@
 <script setup>
 const client = useSupabaseClient();
-const { data: blogs } = await useAsyncData(
-  'lindersplantskola-bloggar',
-  async () => {
-    const { data, error } = await client
-      .from('lindersplantskola-bloggar')
-      .select()
-      .order('post_date', { ascending: false });
-    // .eq('hidden', false)
-    console.log(data);
-    if (error) console.error(error);
+const { data: blogs } = await useAsyncData('lindersplantskola-bloggar', async () => {
+  const { data, error } = await client
+    .from('lindersplantskola-bloggar')
+    .select()
+    .order('post_date', { ascending: false });
+  // .eq('hidden', false)
+  console.log(data);
+  if (error) console.error(error);
 
-    return data;
-  }
-);
+  return data;
+});
 
 const getImage = (text) => {
   const separatedString = text.split(/[\[\]]/).filter((str) => str !== '');
@@ -42,6 +39,14 @@ const renderDate = (date) => {
   };
   return rawDate.toLocaleDateString('sv', options);
 };
+
+useSeoMeta({
+  title: 'Senaste från bloggen - Linders Plantskola',
+  ogTitle: 'Senaste från bloggen',
+  description: 'Här kan du läsa de senaste av mina blogginlägg.',
+  ogDescription: 'Här kan du läsa alla av mina blogginlägg',
+  ogImage: 'https://lindersplantskola.s3.eu-north-1.amazonaws.com/FlygfotoPlantskolanDownscaled',
+});
 </script>
 
 <template>

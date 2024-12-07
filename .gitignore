@@ -12,3 +12,4 @@ localhost-key.pem
 *.pem
 extensions.txt
 desktop.ini
+package-lock copy.json

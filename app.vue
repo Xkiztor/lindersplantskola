@@ -51,17 +51,19 @@ useHead({
       href: 'https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap',
       crossorigin: '',
     },
+    {
+      rel: 'canonical',
+      href: 'https://lindersplantskola.se',
+    },
   ],
 });
 
 useSeoMeta({
-  title: 'Lindersplantskola',
+  title: 'Linders Plantskola',
   ogTitle: 'Plantskola',
   description: 'Småskalig och hantverksmässig plantskola strax utanför Hörby.',
-  ogDescription:
-    'Småskalig och hantverksmässig plantskola strax utanför Hörby.',
-  ogImage:
-    'https://lindersplantskola.s3.eu-north-1.amazonaws.com/hemsida-assets/ogImage.jpg',
+  ogDescription: 'Småskalig och hantverksmässig plantskola strax utanför Hörby.',
+  ogImage: 'https://lindersplantskola.s3.eu-north-1.amazonaws.com/FlygfotoPlantskolanDownscaled',
 });
 
 const runtimeConfig = useRuntimeConfig();
@@ -72,10 +74,7 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
   <div>
     <div class="main-page">
       <header>
-        <nuxt-link
-          to="/"
-          :style="{ display: windowSize.width < 700 ? 'none' : 'block' }"
-        >
+        <nuxt-link to="/" :style="{ display: windowSize.width < 700 ? 'none' : 'block' }">
           <img
             src="https://lindersplantskola.s3.eu-north-1.amazonaws.com/hemsida-assets/logo.png"
             alt="brand-logo"
@@ -93,26 +92,16 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
             </nuxt-link>
             <button
               ref="outsideTarget"
-              @click="
-                isDropdownOpen
-                  ? (isDropdownOpen = false)
-                  : (isDropdownOpen = true)
-              "
+              @click="isDropdownOpen ? (isDropdownOpen = false) : (isDropdownOpen = true)"
             >
               <Icon name="charm:menu-hamburger" />
             </button>
-            <div
-              class="dropdown"
-              v-if="isDropdownOpen"
-              @click="isDropdownOpen = false"
-            >
+            <div class="dropdown" v-if="isDropdownOpen" @click="isDropdownOpen = false">
               <nuxt-link to="/">HEM</nuxt-link>
               <nuxt-link to="/sortiment">SORTIMENT</nuxt-link>
               <!-- <nuxt-link to="/om-oss">OM OSS</nuxt-link> -->
               <nuxt-link to="/bloggar">BLOGG</nuxt-link>
-              <nuxt-link to="https://superlistan.lindersplantskola.se/">
-                SUPERLISTAN
-              </nuxt-link>
+              <nuxt-link to="https://superlistan.lindersplantskola.se/"> SUPERLISTAN </nuxt-link>
             </div>
           </div>
 
@@ -122,15 +111,10 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
             <!-- <nuxt-link to="/om-oss">OM OSS</nuxt-link> -->
             <nuxt-link to="/bloggar">BLOGG</nuxt-link>
             <!-- <nuxt-link to="/aktuellt">NYHETER</nuxt-link> -->
-            <nuxt-link to="https://superlistan.lindersplantskola.se/">
-              SUPERLISTAN
-            </nuxt-link>
+            <nuxt-link to="https://superlistan.lindersplantskola.se/"> SUPERLISTAN </nuxt-link>
           </div>
           <div
-            v-if="
-              windowSize.width > 700 &&
-              enteredPassword === runtimeConfig.public.ADMIN_PASSWORD
-            "
+            v-if="windowSize.width > 700 && enteredPassword === runtimeConfig.public.ADMIN_PASSWORD"
             class="admin-items"
           >
             <nuxt-link to="/admin">Admin</nuxt-link>
@@ -144,9 +128,7 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
       <footer>
         <div>
           <div>
-            <a href="https://lindersplantskola.se/"
-              ><img src="/logo_footer.png" alt="logo"
-            /></a>
+            <a href="https://lindersplantskola.se/"><img src="/logo_footer.png" alt="logo" /></a>
             <p>Glada och ovanliga växter från egen ekologisk odling.</p>
             <div class="text-stack">
               <p>Peter Linder</p>
@@ -154,14 +136,10 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
               <p>peter@lindersplantskola.se</p>
               <p>
                 Köinge 6902, Hörby <i class="max700">- </i>
-                <NuxtLink to="/om-oss/hitta-hit" class="hitta-hit max700"
-                  >Hitta hit</NuxtLink
-                >
+                <NuxtLink to="/om-oss/hitta-hit" class="hitta-hit max700">Hitta hit</NuxtLink>
               </p>
               <p>
-                <a
-                  href="https://www.facebook.com/LindersPlantskola"
-                  target="_blank"
+                <a href="https://www.facebook.com/LindersPlantskola" target="_blank"
                   ><Icon name="mdi:facebook-box"
                 /></a>
                 <a href="https://www.instagram.com/fotodendron/" target="_blank"
@@ -233,7 +211,8 @@ h1,
 button,
 input,
 select,
-textarea {
+textarea,
+.linkbutton {
   background: var(--beige-background);
   color: var(--text-color-on-white);
   border: none;
@@ -247,16 +226,19 @@ textarea {
 
 button,
 input,
-select {
+select,
+.linkbutton {
   transition: all 100ms;
 }
 
-button:hover {
+button:hover,
+.linkbutton:hover {
   opacity: 0.7;
   cursor: pointer;
 }
 
-button:active {
+button:active,
+.linkbutton:active {
   transform: scale(105%);
 }
 /*

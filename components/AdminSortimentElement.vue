@@ -29,10 +29,7 @@ watch(showConfirmModal, () => {
 });
 
 const deletePlant = async () => {
-  const { error } = await client
-    .from('sortiment-import')
-    .delete()
-    .eq('id', props.plant?.id);
+  const { error } = await client.from('sortiment').delete().eq('id', props.plant.id);
   // .eq('name', 'My Restaurant Name')
   // .single();
   if (error) {
@@ -72,7 +69,7 @@ onMounted(() => {
 const updatePlant = async () => {
   for (const name in editedPlant) {
     const { data, error } = await client
-      .from('sortiment-import')
+      .from('sortiment')
       .update({
         [name.charAt(0).toUpperCase() + name.slice(1)]: editedPlant[name],
       })
