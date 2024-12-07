@@ -85,7 +85,7 @@ const superlistaReklamTitelUpdate = async () => {
   if (error) console.error(error);
   if (data) {
     console.log(data);
-    öppetTiderSaved.value = true;
+    superlistaReklamTitelSaved.value = true;
   }
 };
 
@@ -107,7 +107,7 @@ const superlistaReklamContentUpdate = async () => {
   if (error) console.error(error);
   if (data) {
     console.log(data);
-    öppetTiderSaved.value = true;
+    superlistaReklamContentSaved.value = true;
   }
 };
 
@@ -129,7 +129,7 @@ const superlistaReklamBildUpdate = async () => {
   if (error) console.error(error);
   if (data) {
     console.log(data);
-    öppetTiderSaved.value = true;
+    superlistaReklamBildSaved.value = true;
   }
 };
 
