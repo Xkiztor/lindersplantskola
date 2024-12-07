@@ -211,7 +211,8 @@ h1,
 button,
 input,
 select,
-textarea {
+textarea,
+.linkbutton {
   background: var(--beige-background);
   color: var(--text-color-on-white);
   border: none;
@@ -225,16 +226,19 @@ textarea {
 
 button,
 input,
-select {
+select,
+.linkbutton {
   transition: all 100ms;
 }
 
-button:hover {
+button:hover,
+.linkbutton:hover {
   opacity: 0.7;
   cursor: pointer;
 }
 
-button:active {
+button:active,
+.linkbutton:active {
   transform: scale(105%);
 }
 /*

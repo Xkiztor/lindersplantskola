@@ -51,8 +51,20 @@ const { data: öppetTider } = await useAsyncData('lindersplantskola-öppetTider'
 
   return JSON.parse(data.värde);
 });
+const { data: lindersplantskolaConfig } = await useAsyncData(
+  'lindersplantskola-config',
+  async () => {
+    const { data, error } = await client.from('lindersplantskola-config').select();
+    if (error) console.error(error);
 
-console.log(images.value);
+    return data.reduce((acc, item) => {
+      acc[item.inställning] = item.värde;
+      return acc;
+    }, {});
+  }
+);
+
+console.log(lindersplantskolaConfig.value);
 
 useSeoMeta({
   title: 'Linders Plantskola',
@@ -140,6 +152,31 @@ useSeoMeta({
         </div>
       </div> -->
     </div>
+    <section class="superlistan">
+      <div>
+        <h1>{{ lindersplantskolaConfig.superlistaReklamTitel }}</h1>
+        <!-- <h1>Linders superlista</h1> -->
+        <p>
+          {{ lindersplantskolaConfig.superlistaReklamContent }}
+        </p>
+        <!-- <p>
+          En chans att hitta det du länge letat efter! Linders superlista är en härligt späckad
+          lista med 16 000 rader av ovanliga och odlingsvärda växter att beställa ifrån.
+          Beställningen gör du senast 25 februari 2024 för att sedan hämta dina beställda växter på
+          Linders plantskola utanför Hörby i Skåne under maj 2024. Tack vare att du gör
+          beställningen i förväg och själv hämtar ut dina växter kan jag hålla låga priser i Linders
+          superlista.
+        </p> -->
+        <div>
+          <a href="https://superlistan.lindersplantskola.se/" class="linkbutton">
+            Till superlistan <Icon name="majesticons:external-link-line" />
+          </a>
+        </div>
+      </div>
+      <div class="image">
+        <img :src="lindersplantskolaConfig.superlistaReklamBild" alt="" />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -360,5 +397,51 @@ html .seo * {
 .carousel-leave-to {
   opacity: 0;
   position: absolute;
+}
+
+section.superlistan {
+  border-top: var(--dotted-border);
+  padding: 2.5rem 0.5rem 1.5rem;
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media screen and (min-width: 1000px) {
+  section.superlistan {
+    gap: 4rem;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+section.superlistan img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 1rem;
+}
+@media screen and (max-width: 1000px) {
+  section.superlistan .image {
+    grid-row: 1;
+  }
+}
+
+section.superlistan p {
+  line-height: 1.4;
+}
+
+section.superlistan h1 {
+  margin-bottom: 0.5rem;
+}
+
+section.superlistan div:has(> .linkbutton) {
+  width: 100%;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+section.superlistan .linkbutton {
+  width: 100%;
+  display: block;
+  text-decoration: none;
 }
 </style>
