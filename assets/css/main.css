@@ -8,6 +8,7 @@
   --text-color: #f7e8c7;
   --text-color-mute: #cfbe9b;
   --text-color-on-white: #412816;
+  --text-color-on-white-mute: #b59781;
   --beige-background: rgb(250, 236, 201);
   --primary: #eaac06;
   --link-color: rgb(241, 202, 103);
@@ -15,6 +16,5 @@
   --border-radius-medium: 0.5rem;
   --border-radius-large: 1rem;
 
-  --title-font: 'Cabin Sketch', 'Alfa Slab One', 'Merriweather',
-    'Times New Roman', Times, serif;
+  --title-font: 'Cabin Sketch', 'Alfa Slab One', 'Merriweather', 'Times New Roman', Times, serif;
 }

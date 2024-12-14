@@ -73,6 +73,33 @@ useSeoMeta({
   ogDescription: 'Småskalig och hantverksmässig plantskola strax utanför Hörby.',
   ogImage: 'https://lindersplantskola.s3.eu-north-1.amazonaws.com/FlygfotoPlantskolanDownscaled',
 });
+
+// ------------ nyhetsbrev ----------------
+const mailInput = ref('');
+const mailAddError = ref();
+const mailAddSuccess = ref(undefined);
+const mailAdd = async () => {
+  mailAddError.value = {};
+  mailAddSuccess.value = undefined;
+  const { data } = await useFetch('/api/mailchimp', {
+    method: 'POST',
+    body: {
+      action: 'addContact',
+      email: mailInput.value,
+    },
+  });
+  console.log(data.value);
+  if (data.value) {
+    console.log('data!');
+    mailAddSuccess.value = await data.value.success;
+  }
+  if (data.value.error) {
+    console.error('Fel:', data.value.error);
+    mailAddError.value = data.value.error;
+  }
+};
+
+// ----------------------------------------
 </script>
 
 <template>
@@ -109,16 +136,50 @@ useSeoMeta({
     </div>
     <!-- <StoryblokComponent v-if="story" :blok="story.content" /> -->
     <div class="home-page-align">
-      <article alt="Vi har öppet alla lördagar i maj och september kl. 11-15.">
+      <article
+        class="section öppettider"
+        alt="Vi har öppet alla lördagar i maj och september kl. 11-15."
+      >
         <header><h1>Öppettider</h1></header>
         <section>
           <RichText element="p" :content="öppetTider" />
         </section>
       </article>
-      <!-- <article>
+      <div class="section nyhetsbrev">
         <h1>Nyhetsbrev</h1>
-        <Mailchimp />
-      </article> -->
+        <div>
+          <p>Anmäl dig gärna till mitt nyhetsbrev!</p>
+          <p>
+            Du kan läsa gamla nyhetsbrev
+            <a
+              class="link"
+              target="_blank"
+              href="https://us7.campaign-archive.com/home/?u=0e9eb9946e9781ae0c59149df&id=9e50a747e2"
+              >här</a
+            >
+          </p>
+          <div class="input-align">
+            <input v-model="mailInput" placeholder="Epost" type="email" />
+            <button
+              :disabled="!mailInput"
+              :class="{ disabled: !mailInput }"
+              @click="mailInput ? mailAdd() : null"
+            >
+              Prenumerera
+            </button>
+            <p v-if="mailAddSuccess">
+              <Icon size="30" name="material-symbols:check-circle-outline" />
+            </p>
+          </div>
+          <p v-if="mailAddSuccess === false">Fel</p>
+          <p v-if="mailAddError?.title === 'Member Exists'" class="error">
+            Epostadressen är redan prenumererad
+          </p>
+          <div class="error" v-else-if="mailAddError?.title">
+            ({{ mailAddError?.status }}) {{ mailAddError?.title }}
+          </div>
+        </div>
+      </div>
       <!-- <div class="latest-from-blog">
         <h1>Senast från bloggen</h1>
         <div class="latest">
@@ -216,13 +277,13 @@ useSeoMeta({
   }
 }
 
-.home-page-align > article {
+.home-page-align > .section {
   padding: 2rem 2rem 1rem;
   /* padding-top: 2rem; */
 }
 
 @media screen and (min-width: 700px) {
-  .home-page-align > article {
+  .home-page-align > .section {
     padding: 3rem;
     padding-top: 2rem;
   }
@@ -232,6 +293,22 @@ useSeoMeta({
   color: var(--text-color);
   text-align: center;
   margin-bottom: 1rem;
+}
+
+.home-page-align .nyhetsbrev {
+  text-align: center;
+}
+
+.home-page-align .input-align {
+  display: flex;
+  gap: 0rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-page-align input {
+  min-width: 50%;
+  text-align: start;
 }
 
 .hero {

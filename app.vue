@@ -174,6 +174,10 @@ body {
   width: 100%;
 }
 
+a {
+  color: var(--link-color);
+}
+
 h1 {
   font-size: 2rem;
   letter-spacing: -1px;
@@ -231,15 +235,24 @@ select,
   transition: all 100ms;
 }
 
-button:hover,
+button:not(.disabled):hover,
 .linkbutton:hover {
-  opacity: 0.7;
+  opacity: 0.8;
   cursor: pointer;
 }
 
-button:active,
+button:not(.disabled):active,
 .linkbutton:active {
   transform: scale(105%);
+}
+
+button.disabled,
+input.disabled,
+select.disabled,
+textarea.disabled,
+.linkbutton.disabled {
+  color: var(--text-color-on-white-mute);
+  cursor: unset;
 }
 /*
 button:has(.icon) {

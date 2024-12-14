@@ -12,7 +12,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
-      MAILCHIMP: process.env.MAILCHIMP,
+      MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY,
+      MAILCHIMP_LIST_ID: process.env.MAILCHIMP_LIST_ID,
     },
   },
 
