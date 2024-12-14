@@ -4,11 +4,9 @@ import axios from 'axios';
 export default defineEventHandler(async (event) => {
   // Load environment variables
   const apiKey = process.env.MAILCHIMP_API_KEY;
-  // const apiKey = '3a617f4f2d939456217f6d585c4c95ef-us7';
   const dataCenter = apiKey?.split('-')[1]; // Extract the data center from the API key
   // const dataCenter = 'us7'; // Extract the data center from the API key
   const listId = process.env.MAILCHIMP_LIST_ID; // The audience ID for your Mailchimp list
-  // const listId = '9e50a747e2'; // The audience ID for your Mailchimp list
 
   if (!apiKey || !dataCenter || !listId) {
     throw new Error('(Eget fel) Mailchimp API key, data center, or list ID is missing.');
