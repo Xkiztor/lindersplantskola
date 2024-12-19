@@ -138,6 +138,8 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
                 Köinge 6902, Hörby <i class="max700">- </i>
                 <NuxtLink to="/om-oss/hitta-hit" class="hitta-hit max700">Hitta hit</NuxtLink>
               </p>
+            </div>
+            <div class="text-stack">
               <p>
                 <a href="https://www.facebook.com/LindersPlantskola" target="_blank"
                   ><Icon name="mdi:facebook-box"
@@ -146,6 +148,8 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
                   ><Icon name="mdi:instagram"
                 /></a>
               </p>
+              <a href="https://superlistan.lindersplantskola.se/">Superlistan</a>
+              <a href="https://lignosdatabasen.se/">Lignosdatabasen</a>
             </div>
           </div>
           <NuxtLink to="/om-oss/hitta-hit" class="hitta-hit big">

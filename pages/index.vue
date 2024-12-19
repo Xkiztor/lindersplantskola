@@ -271,6 +271,7 @@ const mailAdd = async () => {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding-top: 1rem;
+    padding-bottom: 1rem;
   }
   .home-page-align > :first-child {
     border-right: var(--dotted-border);
@@ -284,8 +285,7 @@ const mailAdd = async () => {
 
 @media screen and (min-width: 700px) {
   .home-page-align > .section {
-    padding: 3rem;
-    padding-top: 2rem;
+    padding: 2rem 3rem;
   }
 }
 
