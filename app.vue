@@ -278,6 +278,10 @@ button:has(.icon) {
   padding: 0.5rem 0.5rem 0;
 }
 
+.main-page:not(:has(.home-page)) {
+  gap: 2rem;
+}
+
 @media screen and (min-width: 500px) {
   .main-page {
     padding: 1rem 1rem 0;
