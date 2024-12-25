@@ -69,7 +69,10 @@ const isEditing = ref(false);
 const editableBlog = ref();
 
 const deleteBlogg = async () => {
-  const { data, error } = await client.from('lindersplantskola-bloggar').delete().eq('ID', `${blog.value.ID}`);
+  const { data, error } = await client
+    .from('lindersplantskola-bloggar')
+    .delete()
+    .eq('ID', `${blog.value.ID}`);
   if (error) console.error(error);
   if (!error) {
     router.push('/bloggar');
@@ -82,11 +85,16 @@ const editBlog = async () => {
   const isoDateTime = currentDate.toISOString().replace('Z', '');
   const { data, error } = await client
     .from('lindersplantskola-bloggar')
-    .update({ title: `${editableBlog.value.title}`, content: `${editableBlog.value.content}`, post_modified: `${isoDateTime}` })
+    .update({
+      title: `${editableBlog.value.title}`,
+      content: `${editableBlog.value.content}`,
+      post_modified: `${isoDateTime}`,
+    })
     .eq('ID', blog.value.ID);
   if (error) console.error(error);
   if (!error) {
     router.push(`/bloggar/${editableBlog.value.title.replaceAll(' ', '+')}`);
+    isEditing.value = false;
   }
   // console.log(data);
   return data;
@@ -100,7 +108,9 @@ const editBlog = async () => {
         <h1>{{ blog.title }}</h1>
         <p class="date">
           <span class="mute">Publicerad:</span> {{ postDate }}
-          <span v-if="postDate !== postModified"><span class="mute">- Redigerad:</span> {{ postModified }}</span>
+          <span v-if="postDate !== postModified"
+            ><span class="mute">- Redigerad:</span> {{ postModified }}</span
+          >
         </p>
 
         <!-------------- ADMIN ------------>
@@ -110,13 +120,39 @@ const editBlog = async () => {
         >
           Redigera
         </button>
-        <button v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && isEditing" @click="isEditing = false">Avbryt</button>
-        <button v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD" @click="arDuSaker = !arDuSaker">Ta bort</button>
-        <p v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && arDuSaker">Är du säker?</p>
-        <button v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && arDuSaker" @click="deleteBlogg()">Ja</button>
-        <button v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && arDuSaker" @click="arDuSaker = false">Avbryt</button>
+        <button
+          v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && isEditing"
+          @click="isEditing = false"
+        >
+          Avbryt
+        </button>
+        <button
+          v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD"
+          @click="arDuSaker = !arDuSaker"
+        >
+          Ta bort
+        </button>
+        <p v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && arDuSaker">
+          Är du säker?
+        </p>
+        <button
+          v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && arDuSaker"
+          @click="deleteBlogg()"
+        >
+          Ja
+        </button>
+        <button
+          v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && arDuSaker"
+          @click="arDuSaker = false"
+        >
+          Avbryt
+        </button>
 
-        <form class="edit" @submit.prevent v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && isEditing">
+        <form
+          class="edit"
+          @submit.prevent
+          v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && isEditing"
+        >
           <div>
             Titel
             <input v-model="editableBlog.title" type="text" />
@@ -147,7 +183,9 @@ const editBlog = async () => {
       <h1>Senaste från bloggen</h1>
       <ul>
         <li v-for="otherblog in otherBlogs">
-          <NuxtLink :to="`./${otherblog.title.replaceAll(' ', '+')}`">{{ otherblog.title }}</NuxtLink>
+          <NuxtLink :to="`./${otherblog.title.replaceAll(' ', '+')}`">{{
+            otherblog.title
+          }}</NuxtLink>
         </li>
         <li class="end">
           <!-- + {{ allaBloggarna.length - antalBloggar }} st till -->
@@ -181,11 +219,12 @@ const editBlog = async () => {
   color: var(--link-color);
 }
 
-.article-page img {
+.article-image {
   width: 100%;
-  max-height: 800px;
+  /* max-height: 800px; */
   object-fit: cover;
   margin: 1rem 0;
+  border-radius: 1rem;
 }
 
 .article-page header {
@@ -305,5 +344,10 @@ form.edit textarea:focus {
 
 form.edit button {
   width: 100%;
+}
+
+.article-page hr {
+  border: none;
+  opacity: 0;
 }
 </style>
