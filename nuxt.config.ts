@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxtjs/mdc',
     '@nuxt/image',
     '@nuxtjs/sitemap',
+    '@nuxt/scripts',
   ],
 
   runtimeConfig: {
@@ -29,6 +30,14 @@ export default defineNuxtConfig({
 
   image: {
     provider: 'ipx',
+  },
+
+  scripts: {
+    registry: {
+      googleAnalytics: {
+        id: 'G-QDMNBXD6EN',
+      },
+    },
   },
 
   site: { url: 'https://lindersplantskola.se/', name: 'Linders plantskola' },

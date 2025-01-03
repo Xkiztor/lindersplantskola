@@ -227,6 +227,10 @@ const editBlog = async () => {
   border-radius: 1rem;
 }
 
+.article-image:hover {
+  cursor: pointer;
+}
+
 .article-page header {
   border-bottom: var(--dotted-border);
   /* border-bottom: 1px solid var(--border-color); */

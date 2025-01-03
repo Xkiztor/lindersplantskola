@@ -16,7 +16,7 @@ const rawDate = new Date();
 const year = rawDate.getFullYear();
 
 useHead({
-  title: 'Lindersplantskola',
+  title: 'Linders Plantskola',
   meta: [
     {
       name: 'description',
@@ -24,7 +24,7 @@ useHead({
     },
     {
       name: 'keywords',
-      content: 'Plantor, Lindersplantskola, plantskola, Växter',
+      content: 'Plantor, Linders Plantskola, plantskola, Växter',
     },
     { name: 'author', content: 'Ugo Linder, Peter Linder' },
   ],
