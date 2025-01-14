@@ -51,10 +51,10 @@ useHead({
       href: 'https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap',
       crossorigin: '',
     },
-    {
-      rel: 'canonical',
-      href: 'https://lindersplantskola.se',
-    },
+    // {
+    //   rel: 'canonical',
+    //   href: 'https://lindersplantskola.se',
+    // },
   ],
 });
 
