@@ -5,6 +5,7 @@ import '~/assets/css/main.css';
 const windowSize = useWidth();
 
 const isDropdownOpen = ref(false);
+const isOmOssOpen = ref(false);
 
 const outsideTarget = ref();
 
@@ -92,26 +93,46 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
             </nuxt-link>
             <button
               ref="outsideTarget"
-              @click="isDropdownOpen ? (isDropdownOpen = false) : (isDropdownOpen = true)"
+              @click="
+                isDropdownOpen ? (isDropdownOpen = false) : (isDropdownOpen = true),
+                  (isOmOssOpen = false)
+              "
             >
               <Icon name="charm:menu-hamburger" />
             </button>
-            <div class="dropdown" v-if="isDropdownOpen" @click="isDropdownOpen = false">
+            <div
+              class="dropdown"
+              v-if="isDropdownOpen"
+              @click="isOmOssOpen ? null : (isDropdownOpen = false)"
+            >
               <nuxt-link to="/">HEM</nuxt-link>
               <nuxt-link to="/sortiment">SORTIMENT</nuxt-link>
-              <!-- <nuxt-link to="/om-oss">OM OSS</nuxt-link> -->
+              <div class="sub-menu">
+                <span>OM OSS</span>
+                <div class="sub-items" @click="isOmOssOpen = false">
+                  <nuxt-link to="/om-oss/plantskolan">PLANTSKOLAN</nuxt-link>
+                  <nuxt-link to="/om-oss/hitta-hit">HITTA HIT</nuxt-link>
+                  <!-- <nuxt-link to="/om-oss/kontakt">KONTAKT</nuxt-link> -->
+                </div>
+              </div>
               <nuxt-link to="/bloggar">BLOGG</nuxt-link>
-              <nuxt-link to="https://superlistan.lindersplantskola.se/"> SUPERLISTAN </nuxt-link>
+              <nuxt-link to="https://superlistan.lindersplantskola.se/">SUPERLISTAN</nuxt-link>
             </div>
           </div>
 
-          <div v-else class="nav-items">
+          <div v-else class="nav-items pc">
             <nuxt-link to="/">HEM</nuxt-link>
             <nuxt-link to="/sortiment">SORTIMENT</nuxt-link>
-            <!-- <nuxt-link to="/om-oss">OM OSS</nuxt-link> -->
+            <div class="sub-menu" @mouseover="isOmOssOpen = true" @mouseleave="isOmOssOpen = false">
+              <span>OM OSS</span>
+              <div v-if="isOmOssOpen" class="sub-items">
+                <nuxt-link to="/om-oss/plantskolan">PLANTSKOLAN</nuxt-link>
+                <nuxt-link to="/om-oss/hitta-hit">HITTA HIT</nuxt-link>
+                <!-- <nuxt-link to="/om-oss/kontakt">KONTAKT</nuxt-link> -->
+              </div>
+            </div>
             <nuxt-link to="/bloggar">BLOGG</nuxt-link>
-            <!-- <nuxt-link to="/aktuellt">NYHETER</nuxt-link> -->
-            <nuxt-link to="https://superlistan.lindersplantskola.se/"> SUPERLISTAN </nuxt-link>
+            <nuxt-link to="https://superlistan.lindersplantskola.se/">SUPERLISTAN</nuxt-link>
           </div>
           <div
             v-if="windowSize.width > 700 && enteredPassword === runtimeConfig.public.ADMIN_PASSWORD"
@@ -211,9 +232,23 @@ h1,
   font-family: var(--title-font);
 }
 
-.article .title {
+.article.page .title {
   color: var(--primary);
   font-size: 2.5rem;
+}
+
+.article.page .subtitle {
+  font-size: 1.25rem;
+}
+
+.article.page p {
+  margin-top: 0.5rem;
+  max-width: 50ch;
+  line-height: 1.25;
+}
+
+.article.page a {
+  color: var(--link-color);
 }
 
 button,
@@ -304,8 +339,11 @@ nav {
   letter-spacing: 1px;
 }
 
-nav a {
+nav a,
+.dropdown .sub-menu span {
   color: white;
+  font-family: 'Merriweather', 'Times New Roman', Times, serif;
+  font-size: 1rem;
   text-decoration: none;
   padding: 0.3rem 0.5rem;
   margin: 0;
@@ -355,7 +393,8 @@ header img {
 }
 
 .dropdown {
-  width: 50vw;
+  min-width: 50vw;
+  max-width: 75vw;
   position: absolute;
   border-radius: var(--border-radius-large);
   z-index: 5;
@@ -370,6 +409,13 @@ header img {
 
 .dropdown a {
   border-radius: var(--border-radius-large);
+}
+
+.mobile-nav .dropdown a.router-link-active {
+  background: var(--beige-background);
+  color: var(--text-color-on-white);
+  border-radius: 0;
+  border-left: 3px solid var(--primary);
 }
 
 .nav-items > .router-link-active {
@@ -516,5 +562,86 @@ footer .hitta-hit .icon {
 
 .post-preview a.spacer * {
   margin-bottom: 0.5rem;
+}
+
+.sub-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.mobile-nav .sub-menu {
+  padding-top: 0.3rem;
+}
+
+.sub-menu:hover button,
+.sub-menu:hover span {
+  background: var(--beige-background);
+  color: var(--text-color-on-white);
+}
+
+.sub-menu > span,
+.sub-menu > button {
+  /* color: white; */
+  text-decoration: none;
+  padding: 0.3rem 0.5rem;
+  margin-right: 0.5rem;
+  cursor: default;
+  border-left: 3px solid transparent;
+}
+
+.sub-menu > span:hover {
+  /* border-left: 3px solid var(--primary); */
+  /* background: var(--beige-background); */
+  /* color: var(--text-color-on-white); */
+}
+
+.sub-items {
+  position: absolute;
+  background: var(--beige-background);
+  border-radius: 0 var(--border-radius-medium) var(--border-radius-medium)
+    var(--border-radius-medium);
+  padding: 0.4rem 0.5rem 0.75rem 0;
+  /* padding-left: 0; */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  /* min-width: 200px; */
+  top: 22px;
+}
+
+.sub-items a {
+  color: var(--text-color-on-white);
+  border-radius: 0;
+  padding: 0.5rem 0.5rem;
+}
+
+.sub-items a:hover {
+  /* opacity: 0.6; */
+  color: #a1714a;
+}
+
+.mobile-nav .sub-items {
+  position: relative;
+  top: 0;
+  background: none;
+  display: block;
+  padding: 0;
+  padding-top: 0.1rem;
+
+  /* margin-left: 1rem; */
+}
+
+.mobile-nav .sub-items a {
+  /* padding: 0.5rem 0.5rem; */
+  margin: 0.2rem 0;
+  padding-right: 0.5rem;
+  margin-left: 1rem;
+  color: white;
+  background: none;
+  display: block;
+
+  border-left: 3px solid #483007;
+  padding: 0.3rem 0.5rem;
 }
 </style>

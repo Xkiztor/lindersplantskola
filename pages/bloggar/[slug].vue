@@ -99,6 +99,19 @@ const editBlog = async () => {
   // console.log(data);
   return data;
 };
+
+const toggleHidden = async () => {
+  const { data, error } = await client
+    .from('lindersplantskola-bloggar')
+    .update({
+      hidden: !blog.value.hidden,
+    })
+    .eq('ID', blog.value.ID);
+  if (error) console.error(error);
+  if (!error) {
+    blog.value.hidden = !blog.value.hidden;
+  }
+};
 </script>
 
 <template>
@@ -114,39 +127,24 @@ const editBlog = async () => {
         </p>
 
         <!-------------- ADMIN ------------>
-        <button
-          v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && !isEditing"
-          @click="(isEditing = true), (editableBlog = blog)"
-        >
-          Redigera
-        </button>
-        <button
-          v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && isEditing"
-          @click="isEditing = false"
-        >
-          Avbryt
-        </button>
-        <button
-          v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD"
-          @click="arDuSaker = !arDuSaker"
-        >
-          Ta bort
-        </button>
-        <p v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && arDuSaker">
-          Är du säker?
-        </p>
-        <button
-          v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && arDuSaker"
-          @click="deleteBlogg()"
-        >
-          Ja
-        </button>
-        <button
-          v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD && arDuSaker"
-          @click="arDuSaker = false"
-        >
-          Avbryt
-        </button>
+        <div v-if="enteredPassword === runtimeConfig.public.ADMIN_PASSWORD">
+          <button v-if="!isEditing" @click="(isEditing = true), (editableBlog = blog)">
+            Redigera
+          </button>
+          <button v-if="isEditing" @click="(isEditing = false), (editableBlog = null)">
+            Avbryt
+          </button>
+
+          <button v-if="!isEditing" @click="arDuSaker = !arDuSaker">Ta bort</button>
+          <p v-if="arDuSaker">Är du säker?</p>
+          <button v-if="arDuSaker" @click="deleteBlogg()">Ja</button>
+          <button v-if="arDuSaker" @click="arDuSaker = false">Avbryt</button>
+
+          <button @click="toggleHidden">
+            {{ blog.hidden ? 'Visa' : 'Göm' }}
+          </button>
+          <span v-if="blog.hidden" class="hidden-status">(Dold)</span>
+        </div>
 
         <form
           class="edit"
@@ -353,5 +351,11 @@ form.edit button {
 .article-page hr {
   border: none;
   opacity: 0;
+}
+
+.hidden-status {
+  color: var(--text-color-mute);
+  font-style: italic;
+  margin-left: 0.5rem;
 }
 </style>

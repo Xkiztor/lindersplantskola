@@ -4,8 +4,8 @@ const { data: blogs } = await useAsyncData('lindersplantskola-bloggar', async ()
   const { data, error } = await client
     .from('lindersplantskola-bloggar')
     .select()
+    .eq('hidden', false)
     .order('post_date', { ascending: false });
-  // .eq('hidden', false)
   console.log(data);
   if (error) console.error(error);
 
