@@ -14,6 +14,7 @@ interface Plant {
   Kruka: string;
   Höjd: string;
   id: string;
+  Dold?: boolean; // Add Dold property
 }
 
 const expanded = ref(false);
@@ -30,8 +31,6 @@ watch(showConfirmModal, () => {
 
 const deletePlant = async () => {
   const { error } = await client.from('sortiment').delete().eq('id', props.plant.id);
-  // .eq('name', 'My Restaurant Name')
-  // .single();
   if (error) {
     console.log(error);
   }
@@ -88,6 +87,20 @@ const updatePlant = async () => {
     }
   }
 };
+
+const toggleHidePlant = async () => {
+  const newDold = !props.plant.Dold;
+  const { error } = await client
+    .from('sortiment')
+    .update({ Dold: newDold })
+    .eq('id', props.plant.id);
+  if (error) {
+    console.log(error);
+  } else {
+    refreshNuxtData();
+    console.log('Dold toggled:', newDold);
+  }
+};
 </script>
 
 <template>
@@ -104,17 +117,21 @@ const updatePlant = async () => {
     <div class="column-align">
       <p>{{ plant.Artnamn }}</p>
       <p>{{ plant.SvensktNamn }}</p>
-      <!-- <p>{{ plant.Kruka }} - {{ plant.Höjd }} cm</p> -->
       <p class="hide-on-phone">{{ plant.Zon }}</p>
       <p class="hide-on-phone">{{ plant.Antal }}</p>
       <p class="end-text">{{ plant.Pris }}kr</p>
     </div>
     <div v-if="expanded" class="admin-expanded" @click.stop="">
-      <!-- <h1>{{ plant.Artnamn }}, {{ plant.SvensktNamn }}</h1> -->
       <p>Kruka: {{ plant.Kruka }}</p>
       <p v-if="plant.Höjd">Höjd: {{ plant.Höjd }} cm</p>
       <p v-if="plant.Zon" class="hide-on-pc">Zon: {{ plant.Zon }}</p>
       <p v-if="plant.Antal" class="hide-on-pc">{{ plant.Antal }} st</p>
+      <button @click="toggleHidePlant">
+        <Icon
+          :name="plant.Dold ? 'material-symbols:visibility' : 'material-symbols:visibility-off'"
+        />
+        {{ plant.Dold ? 'Visa' : 'Dölj' }}
+      </button>
       <button @click.stop="showConfirmModal = true">
         <Icon name="material-symbols:delete-forever-rounded" /> Ta bort
       </button>
@@ -167,7 +184,6 @@ const updatePlant = async () => {
 .list-el {
   padding: 0.5rem;
   border-bottom: 1px solid var(--border-color);
-  /* border-top: 1px solid var(--border-color); */
   cursor: pointer;
 }
 
