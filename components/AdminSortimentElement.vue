@@ -114,7 +114,7 @@ const toggleHidePlant = async () => {
         </div>
       </div>
     </teleport>
-    <div class="column-align">
+    <div class="column-align" :style="plant.Dold ? 'opacity: 0.5' : ''">
       <p>{{ plant.Artnamn }}</p>
       <p>{{ plant.SvensktNamn }}</p>
       <p class="hide-on-phone">{{ plant.Zon }}</p>
@@ -222,6 +222,6 @@ const toggleHidePlant = async () => {
 }
 
 .admin-expanded {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 </style>
