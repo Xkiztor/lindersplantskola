@@ -77,7 +77,7 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
       <header>
         <nuxt-link to="/" :style="{ display: windowSize.width < 700 ? 'none' : 'block' }">
           <img
-            src="https://lindersplantskola.s3.eu-north-1.amazonaws.com/hemsida-assets/logo.png"
+            src="https://oykwqfkocubjvrixrunf.supabase.co/storage/v1/object/public/bilder/liplant-logo.png"
             alt="brand-logo"
             v-if="windowSize.width > 700"
           />
@@ -87,7 +87,7 @@ const enteredPassword = useCookie('enteredPassword', { maxAge: 60604800 });
           <div v-if="windowSize.width < 700" class="mobile-nav">
             <nuxt-link to="/">
               <img
-                src="https://lindersplantskola.s3.eu-north-1.amazonaws.com/hemsida-assets/logo.png"
+                src="https://oykwqfkocubjvrixrunf.supabase.co/storage/v1/object/public/bilder/liplant-logo.png"
                 alt="logo"
               />
             </nuxt-link>
