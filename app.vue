@@ -64,7 +64,8 @@ useSeoMeta({
   ogTitle: 'Plantskola',
   description: 'Småskalig och hantverksmässig plantskola strax utanför Hörby.',
   ogDescription: 'Småskalig och hantverksmässig plantskola strax utanför Hörby.',
-  ogImage: 'https://lindersplantskola.s3.eu-north-1.amazonaws.com/FlygfotoPlantskolanDownscaled',
+  ogImage:
+    'https://oykwqfkocubjvrixrunf.supabase.co/storage/v1/object/public/bilder/DJI_0979%20(Medium).JPG',
 });
 
 const runtimeConfig = useRuntimeConfig();

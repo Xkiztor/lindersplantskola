@@ -45,7 +45,8 @@ useSeoMeta({
   ogTitle: 'Senaste från bloggen',
   description: 'Här kan du läsa de senaste av mina blogginlägg.',
   ogDescription: 'Här kan du läsa alla av mina blogginlägg',
-  ogImage: 'https://lindersplantskola.s3.eu-north-1.amazonaws.com/FlygfotoPlantskolanDownscaled',
+  ogImage:
+    'https://oykwqfkocubjvrixrunf.supabase.co/storage/v1/object/public/bilder/DJI_0979%20(Medium).JPG',
 });
 </script>
 
